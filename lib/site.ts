@@ -91,6 +91,15 @@ export function isPlaceholder(value: string): boolean {
   return value.startsWith("{{");
 }
 
+/**
+ * Canonical site origin (no trailing slash). Override per environment with
+ * NEXT_PUBLIC_SITE_URL; defaults to the primary domain. Used for metadataBase,
+ * sitemap, robots and structured data.
+ */
+export const SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://wareplumbing.com.au"
+).replace(/\/+$/, "");
+
 export interface NavLink {
   label: string;
   href: string;

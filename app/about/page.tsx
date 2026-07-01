@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "About",
   description:
     "Ware Plumbing is a family-run team of licensed plumbers serving Melbourne's South East for over 30 years. Honest, transparent and guaranteed work.",
+  alternates: { canonical: "/about" },
 };
 
 const STATS = [

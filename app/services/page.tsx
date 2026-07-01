@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Services",
   description:
     "Water leaks, blocked drains, taps and toilets, gas fitting, hot water systems, burst pipes and roofing — professional plumbing across Melbourne's South East.",
+  alternates: { canonical: "/services" },
 };
 
 export default function ServicesPage() {

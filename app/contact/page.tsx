@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Get in touch",
   description:
     "Contact Ware Plumbing on 03 9790 5550 or send an enquiry online. Servicing Melbourne's South East — we'll get back to you promptly.",
+  alternates: { canonical: "/contact" },
 };
 
 const CONTACT_ROWS = [
