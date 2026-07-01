@@ -41,3 +41,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# legacy stock/placeholder photos — swap for real photography before launch.
+# Re-fetch anytime with scripts/fetch-legacy-images.sh
+/public/assets/photos/_replace/
