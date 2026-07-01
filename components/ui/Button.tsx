@@ -6,17 +6,24 @@ import { cn } from "@/lib/cn";
 type Variant = "primary" | "outline" | "ghost";
 type Size = "sm" | "md" | "lg";
 
+// Real states, not just a colour swap: a small lift on hover (transform +
+// shadow) and a press on :active. Transform/shadow are GPU-friendly. The lift
+// is disabled under reduced motion; colour/shadow still respond.
 const base =
-  "inline-flex items-center justify-center gap-2 font-medium transition-colors " +
+  "group/btn inline-flex items-center justify-center gap-2 font-medium " +
+  "transition-[transform,box-shadow,background-color,border-color,color] duration-200 ease-out-expo " +
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 " +
+  "active:translate-y-0 active:duration-75 motion-reduce:transition-colors motion-reduce:hover:translate-y-0 " +
   "disabled:opacity-50 disabled:pointer-events-none";
 
 const variants: Record<Variant, string> = {
-  // Blue fill, white text — the main action (book, call, contact).
-  primary: "bg-blue text-white hover:bg-blue-dark",
+  // Blue fill, white text — the main action. Brand-tinted lift on hover.
+  primary:
+    "bg-blue text-white shadow-sm hover:bg-blue-dark hover:-translate-y-0.5 hover:shadow-blue active:shadow-sm",
   // White fill, line border, ink text — secondary action.
-  outline: "bg-white text-ink border border-line hover:bg-surface hover:border-grey",
-  // Blue text, no fill — inline CTA with a chevron (the hero CTA style).
+  outline:
+    "bg-white text-ink border border-line hover:bg-surface hover:border-grey hover:-translate-y-0.5 hover:shadow-md active:shadow-sm",
+  // Blue text, no fill — inline CTA; the chevron slides on hover (see below).
   ghost: "text-blue hover:text-blue-dark",
 };
 
@@ -76,7 +83,12 @@ export function Button({
   const content = (
     <>
       {children}
-      {showChevron && <ChevronRight aria-hidden className="size-4" />}
+      {showChevron && (
+        <ChevronRight
+          aria-hidden
+          className="size-4 transition-transform duration-200 ease-out-expo group-hover/btn:translate-x-0.5 motion-reduce:transition-none motion-reduce:group-hover/btn:translate-x-0"
+        />
+      )}
     </>
   );
 

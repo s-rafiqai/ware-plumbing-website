@@ -1,5 +1,6 @@
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
+import { Reveal } from "@/components/motion/Reveal";
 import { PRIMARY_CTA, SITE } from "@/lib/site";
 
 /**
@@ -10,7 +11,7 @@ import { PRIMARY_CTA, SITE } from "@/lib/site";
 export function ContactCta() {
   return (
     <Section aria-labelledby="cta-heading">
-      <div className="rounded-md bg-ink px-6 py-12 text-white sm:px-12 sm:py-16">
+      <Reveal className="rounded-md bg-ink px-6 py-12 text-white sm:px-12 sm:py-16">
         <div className="mx-auto max-w-2xl text-center">
           <h2 id="cta-heading" className="text-h2 text-white text-balance">
             Need a plumber in Melbourne&rsquo;s South East?
@@ -38,7 +39,7 @@ export function ContactCta() {
             ))}
           </ul>
         </div>
-      </div>
+      </Reveal>
     </Section>
   );
 }

@@ -46,6 +46,13 @@
    * Line-heights: body is specified (1.5); heading line-heights are tightened
    * per the "keep headlines tight" rule — reasonable values, tune if needed.
    */
+  /* Hero-scale display, added in the elevation pass — the PDF tops out at 48px,
+     too small to dominate on desktop. Reserved for the hero headline. */
+  --text-display-lg: 3.75rem; /* 60px */
+  --text-display-lg--line-height: 1.02;
+  --text-display-lg--letter-spacing: -2px;
+  --text-display-lg--font-weight: 800;
+
   --text-display: 3rem; /* 48px */
   --text-display--line-height: 1.05;
   --text-display--letter-spacing: -1.5px;
@@ -65,6 +72,12 @@
   --text-h3--line-height: 1.3;
   --text-h3--font-weight: 700;
 
+  /* Lead / subhead size, added in the elevation pass — the missing step between
+     body (16) and h3 (20). Replaces the old `text-h3 font-normal` intro hack. */
+  --text-lead: 1.125rem; /* 18px */
+  --text-lead--line-height: 1.6;
+  --text-lead--font-weight: 400;
+
   --text-body: 1rem; /* 16px */
   --text-body--line-height: 1.5;
 
@@ -80,9 +93,24 @@
   --shadow-sm: 0 1px 3px rgba(20, 24, 29, 0.06);
   --shadow-md: 0 4px 14px rgba(20, 24, 29, 0.08);
   --shadow-lg: 0 12px 32px rgba(20, 24, 29, 0.12);
+  /* Brand-tinted lift for the primary button hover — reads warmer than grey. */
+  --shadow-blue: 0 10px 24px -8px rgba(45, 127, 249, 0.5);
+
+  /* --- Motion (elevation pass) --- */
+  /* Easings exposed to Tailwind as ease-out-expo / ease-out-soft utilities;
+     JS mirrors these in lib/motion.ts so CSS and Motion stay in sync. */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-soft: cubic-bezier(0.33, 1, 0.68, 1);
 
   /* --- Layout --- */
   --container-page: 1200px; /* max content width → max-w-page */
+}
+
+/* Motion durations — used in hand-written CSS/inline; JS mirrors them. */
+:root {
+  --dur-fast: 150ms;
+  --dur: 300ms;
+  --dur-slow: 600ms;
 }
 
 body {

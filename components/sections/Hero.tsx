@@ -1,7 +1,18 @@
-import { Check, MapPin } from "lucide-react";
-import { Section } from "@/components/ui/Section";
+"use client";
+
+import { useRef } from "react";
+import Image from "next/image";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "motion/react";
+import { Check } from "lucide-react";
+import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { isPlaceholder, PRIMARY_CTA, SITE } from "@/lib/site";
+import { PRIMARY_CTA, SITE } from "@/lib/site";
+import { EASE_OUT_EXPO } from "@/lib/motion";
 
 const HIGHLIGHTS = [
   "Licensed plumbers",
@@ -10,94 +21,134 @@ const HIGHLIGHTS = [
   "Seniors discount",
 ];
 
-/** Homepage hero: positioning headline + CTAs on the left, a "call now" card right. */
+/**
+ * Homepage hero — the single most important moment on the site.
+ *
+ * Asymmetric: a dominant headline column on the left, a layered photo on the
+ * right (offset accent panel behind, overlapping stat badge in front). On
+ * scroll the photo scales subtly (Ken-Burns) for depth. Entrance is tuned for
+ * LCP: the headline slides without fading and the photo never fades, so the
+ * largest paint isn't gated behind JS. All motion is disabled under
+ * prefers-reduced-motion.
+ */
 export function Hero() {
-  const hoursKnown = !isPlaceholder(SITE.hours);
+  const reduce = useReducedMotion();
+  const frameRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: frameRef,
+    offset: ["start start", "end start"],
+  });
+  const rawScale = useTransform(scrollYProgress, [0, 1], [1, 1.06]);
+  const scale = reduce ? 1 : rawScale;
+
+  // Slide-only for the headline (opacity stays 1 → LCP-safe); fade+rise for the
+  // supporting elements, which aren't the largest paint.
+  const headline = reduce
+    ? {}
+    : {
+        initial: { y: 18 },
+        animate: { y: 0 },
+        transition: { duration: 0.6, ease: EASE_OUT_EXPO, delay: 0.05 },
+      };
+  const rise = (delay: number) =>
+    reduce
+      ? {}
+      : {
+          initial: { opacity: 0, y: 16 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.6, ease: EASE_OUT_EXPO, delay },
+        };
+
   return (
-    <Section className="lg:pt-24" aria-labelledby="hero-heading">
-      <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
-        {/* Copy */}
-        <div>
-          <p className="text-small font-semibold uppercase tracking-wide text-blue">
-            Melbourne&rsquo;s South East · 30+ years
-          </p>
-          <h1
-            id="hero-heading"
-            className="mt-4 text-h1 text-ink sm:text-display text-balance"
-          >
-            Your trusted choice for all plumbing works
-          </h1>
-          <p className="mt-5 max-w-xl text-h3 font-normal text-ink-soft text-pretty">
-            Family-run and serving the community for over 30 years — from a
-            dripping tap to a burst pipe, no job is too big or small.
-          </p>
+    <section className="overflow-x-clip py-16 md:py-24 lg:py-28">
+      <Container>
+        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+          {/* Copy */}
+          <div>
+            <motion.p
+              {...rise(0)}
+              className="text-small font-semibold uppercase tracking-wide text-blue"
+            >
+              Melbourne&rsquo;s South East · 30+ years
+            </motion.p>
+            <motion.h1
+              {...headline}
+              className="mt-4 text-display text-ink lg:text-display-lg text-balance"
+            >
+              Your trusted choice for all plumbing works
+            </motion.h1>
+            <motion.p
+              {...rise(0.15)}
+              className="mt-5 max-w-xl text-lead text-ink-soft text-pretty"
+            >
+              Family-run and serving the community for over 30 years — from a
+              dripping tap to a burst pipe, no job is too big or small.
+            </motion.p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <Button href={PRIMARY_CTA.href}>{PRIMARY_CTA.label}</Button>
-            <Button href={SITE.phone.href} variant="outline">
-              Call {SITE.phone.display}
-            </Button>
+            <motion.div
+              {...rise(0.25)}
+              className="mt-8 flex flex-wrap items-center gap-4"
+            >
+              <Button href={PRIMARY_CTA.href} size="lg">
+                {PRIMARY_CTA.label}
+              </Button>
+              <Button href={SITE.phone.href} variant="outline" size="lg">
+                Call {SITE.phone.display}
+              </Button>
+            </motion.div>
+
+            <motion.ul
+              {...rise(0.35)}
+              className="mt-8 flex flex-wrap gap-x-6 gap-y-2"
+            >
+              {HIGHLIGHTS.map((item) => (
+                <li key={item} className="flex items-center gap-2 text-body text-ink-soft">
+                  <Check aria-hidden className="size-4 shrink-0 text-blue" />
+                  {item}
+                </li>
+              ))}
+            </motion.ul>
           </div>
 
-          <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
-            {HIGHLIGHTS.map((item) => (
-              <li key={item} className="flex items-center gap-2 text-body text-ink-soft">
-                <Check aria-hidden className="size-4 shrink-0 text-blue" />
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Call-now card */}
-        <div className="rounded-md border border-line bg-white p-8 shadow-md">
-          <p className="text-small font-semibold uppercase tracking-wide text-grey">
-            Call now
-          </p>
-          <a
-            href={SITE.phone.href}
-            className="mt-2 block text-h2 font-extrabold tracking-tight text-ink hover:text-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 rounded-sm"
-          >
-            {SITE.phone.display}
-          </a>
-          <p className="mt-2 text-body text-ink-soft">
-            We&rsquo;re ready to help across Melbourne&rsquo;s South East.
-          </p>
-
-          <dl className="mt-6 space-y-3 border-t border-line pt-6 text-body">
-            <div className="flex justify-between gap-4">
-              <dt className="text-grey">Mobile</dt>
-              <dd>
-                <a href={SITE.mobile.href} className="text-ink hover:text-blue">
-                  {SITE.mobile.display}
-                </a>
-              </dd>
+          {/* Layered photo */}
+          <div className="relative">
+            {/* Offset accent panel behind, for depth. */}
+            <div
+              aria-hidden
+              className="absolute -right-4 -top-4 -z-10 h-full w-full rounded-md bg-blue-tint"
+            />
+            <div
+              ref={frameRef}
+              className="relative aspect-[4/3] overflow-hidden rounded-md shadow-lg"
+            >
+              <motion.div style={{ scale }} className="absolute inset-0">
+                <Image
+                  src="/assets/photos/hero-plumber.png"
+                  alt="A Ware Plumbing plumber on the job."
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 45vw"
+                  className="object-cover object-center"
+                />
+              </motion.div>
             </div>
-            <div className="flex justify-between gap-4">
-              <dt className="text-grey">Email</dt>
-              <dd>
-                <a href={SITE.email.href} className="text-ink hover:text-blue">
-                  {SITE.email.display}
-                </a>
-              </dd>
-            </div>
-            <div className="flex justify-between gap-4">
-              <dt className="text-grey">Hours</dt>
-              {/* TODO: business hours pending (brief §9). */}
-              <dd className="text-ink">{hoursKnown ? SITE.hours : "To be confirmed"}</dd>
-            </div>
-          </dl>
 
-          <div className="mt-6 flex items-center gap-2 text-small text-ink-soft">
-            <MapPin aria-hidden className="size-4 shrink-0 text-grey" />
-            {SITE.suburbs.slice(0, 4).join(" · ")} &amp; more
+            {/* Overlapping stat badge, in front of the photo. */}
+            <motion.div
+              {...rise(0.4)}
+              className="absolute -bottom-5 left-4 flex items-center gap-3 rounded-md border border-line bg-white px-4 py-3 shadow-lg sm:left-6"
+            >
+              <span className="text-h2 font-extrabold tracking-tight text-blue">30+</span>
+              <span className="text-small text-ink-soft">
+                years serving
+                <br />
+                Melbourne&rsquo;s South East
+              </span>
+            </motion.div>
           </div>
-
-          <Button href={PRIMARY_CTA.href} className="mt-6 w-full">
-            {PRIMARY_CTA.label}
-          </Button>
         </div>
-      </div>
-    </Section>
+      </Container>
+    </section>
   );
 }

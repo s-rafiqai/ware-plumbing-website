@@ -1,6 +1,7 @@
 import type { ComponentType, SVGProps } from "react";
 import { Award, Building2, Wrench } from "lucide-react";
 import { Section } from "@/components/ui/Section";
+import { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { TRUST_BADGES, type TrustIconName } from "@/content/trust";
 
 const ICONS: Record<TrustIconName, ComponentType<SVGProps<SVGSVGElement>>> = {
@@ -13,11 +14,11 @@ const ICONS: Record<TrustIconName, ComponentType<SVGProps<SVGSVGElement>>> = {
 export function TrustBadges() {
   return (
     <Section className="py-8 md:py-10 lg:py-12">
-      <ul className="grid gap-6 sm:grid-cols-3">
+      <RevealGroup as="ul" className="grid gap-6 sm:grid-cols-3">
         {TRUST_BADGES.map((badge) => {
           const Icon = ICONS[badge.icon];
           return (
-            <li key={badge.title} className="flex gap-4">
+            <RevealItem as="li" key={badge.title} className="flex gap-4">
               <span className="grid size-11 shrink-0 place-items-center rounded-sm bg-blue-tint text-blue">
                 <Icon aria-hidden className="size-6" />
               </span>
@@ -27,10 +28,10 @@ export function TrustBadges() {
                   {badge.description}
                 </p>
               </div>
-            </li>
+            </RevealItem>
           );
         })}
-      </ul>
+      </RevealGroup>
     </Section>
   );
 }

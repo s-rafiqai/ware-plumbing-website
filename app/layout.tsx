@@ -47,6 +47,11 @@ export default function RootLayout({
   return (
     <html lang="en-AU" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
+        {/* Safety net: if JS is disabled/fails, scroll-reveal elements (which
+            Motion server-renders at opacity:0) are forced visible. */}
+        <noscript>
+          <style>{`[style]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
         <JsonLd />
         {/* Keyboard/screen-reader users can jump straight to the content. */}
         <a
