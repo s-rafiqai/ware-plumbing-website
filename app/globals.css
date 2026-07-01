@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+/*
+ * ============================================================================
+ *  DESIGN TOKENS — PLACEHOLDER VALUES (Phase 0)
+ * ----------------------------------------------------------------------------
+ *  These are the placeholder tokens from the master brief. They are the SINGLE
+ *  place design values live, exposed both as CSS variables (:root) and as
+ *  Tailwind theme tokens (@theme), so utilities like `bg-accent`, `text-ink`
+ *  and `font-sans` resolve to them.
+ *
+ *  PHASE 1: replace every value below with the real values from
+ *  docs/Ware-Plumbing-Design-System.pdf (colours, type scale, spacing, radii,
+ *  shadows). The PDF is the source of truth and supersedes these placeholders.
+ *  Nothing else in the codebase should need to change when you do.
+ * ============================================================================
+ */
+
+:root {
+  /* Neutrals — near-black ink on white / off-white surfaces. */
+  --color-ink: #0a0a0a;
+  --color-ink-soft: #111111;
+  --color-ink-muted: #52525b; /* secondary text */
+  --color-surface: #ffffff;
+  --color-surface-muted: #fafafa; /* off-white section backgrounds */
+  --color-border: #e5e5e5;
+
+  /* Single accent — used sparingly for CTAs, links, active/focus states. */
+  --color-accent: #2d7ff9;
+  --color-accent-hover: #1f6fe5;
+  --color-accent-contrast: #ffffff; /* text/icon colour on the accent */
+}
+
+@theme inline {
+  /* Map the CSS variables above into Tailwind's token namespace. */
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-ink-muted: var(--color-ink-muted);
+  --color-surface: var(--color-surface);
+  --color-surface-muted: var(--color-surface-muted);
+  --color-border: var(--color-border);
+  --color-accent: var(--color-accent);
+  --color-accent-hover: var(--color-accent-hover);
+  --color-accent-contrast: var(--color-accent-contrast);
+
+  /* Inter, provided by next/font via the --font-sans variable (see layout). */
+  --font-sans: var(--font-sans);
+}
+
+body {
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
