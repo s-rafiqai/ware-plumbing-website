@@ -3,10 +3,10 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { SITE } from "@/lib/site";
 
-// Inter, loaded and self-hosted by next/font. Exposed as the `--font-sans`
-// CSS variable so Tailwind's font-sans utility (see globals.css) resolves to it.
+// Inter, loaded and self-hosted by next/font. Exposed as the `--font-inter`
+// CSS variable, which globals.css feeds into the Tailwind `--font-sans` token.
 const inter = Inter({
-  variable: "--font-sans",
+  variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
 });
@@ -27,7 +27,7 @@ export default function RootLayout({
   // en-AU: Australian English is the site default (spelling, date/number formats).
   return (
     <html lang="en-AU" className={`${inter.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-surface text-ink">
+      <body className="min-h-full flex flex-col">
         {children}
       </body>
     </html>
