@@ -4,9 +4,9 @@ import { Reveal } from "@/components/motion/Reveal";
 import { PRIMARY_CTA, SITE } from "@/lib/site";
 
 /**
- * Conversion band above the footer: a dark panel with the primary actions and
- * the service-area suburbs. (Replaces the old generic map pin — there's no real
- * street address yet; brief §9.)
+ * Conversion band above the footer: a contained dark panel with the primary
+ * actions — the light-theme bookend to the dark hero. Service-area suburbs now
+ * live in the marquee just above, so they're not repeated here.
  */
 export function ContactCta() {
   return (
@@ -27,17 +27,6 @@ export function ContactCta() {
               Call {SITE.phone.display}
             </Button>
           </div>
-
-          <ul className="mt-10 flex flex-wrap justify-center gap-2">
-            {SITE.suburbs.map((suburb) => (
-              <li
-                key={suburb}
-                className="rounded-pill border border-white/15 px-3 py-1 text-small text-white/70"
-              >
-                {suburb}
-              </li>
-            ))}
-          </ul>
         </div>
       </Reveal>
     </Section>

@@ -2,10 +2,20 @@ import type { ElementType, ReactNode } from "react";
 import { Container } from "@/components/ui/Container";
 import { cn } from "@/lib/cn";
 
+/** Vertical rhythm presets — deliberate dynamic range between sections. */
+type Space = "tight" | "default" | "spacious";
+const SPACE: Record<Space, string> = {
+  tight: "py-8 md:py-10",
+  default: "py-10 md:py-16 lg:py-24", // the design system's 40→64→96
+  spacious: "py-16 md:py-24 lg:py-32",
+};
+
 interface SectionProps {
   children: ReactNode;
   /** Applies the off-white surface background for alternating sections. */
   muted?: boolean;
+  /** Vertical rhythm preset (default = 40→64→96). */
+  space?: Space;
   className?: string;
   /** Extra classes on the inner Container. */
   innerClassName?: string;
@@ -15,12 +25,13 @@ interface SectionProps {
 }
 
 /**
- * A full-width section with the design system's responsive vertical rhythm
- * (40 → 64 → 96px), wrapping its content in the page Container.
+ * A full-width section wrapping its content in the page Container, with a
+ * selectable vertical-rhythm preset so the page can breathe unevenly on purpose.
  */
 export function Section({
   children,
   muted,
+  space = "default",
   className,
   innerClassName,
   as: Tag = "section",
@@ -30,7 +41,7 @@ export function Section({
   return (
     <Tag
       id={id}
-      className={cn("py-10 md:py-16 lg:py-24", muted && "bg-surface", className)}
+      className={cn(SPACE[space], muted && "bg-surface", className)}
       {...aria}
     >
       <Container className={innerClassName}>{children}</Container>

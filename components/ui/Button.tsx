@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { ArrowUpRight, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 type Variant = "primary" | "outline" | "ghost";
@@ -40,6 +40,8 @@ interface CommonProps {
   pill?: boolean;
   /** Show a trailing chevron. Defaults on for the ghost (inline CTA) variant. */
   chevron?: boolean;
+  /** Show a trailing outward arrow (↗) that lifts up-right on hover. */
+  arrow?: boolean;
   className?: string;
   children: ReactNode;
 }
@@ -66,11 +68,12 @@ export function Button({
   size = "md",
   pill,
   chevron,
+  arrow,
   className,
   children,
   ...rest
 }: ButtonProps) {
-  const showChevron = chevron ?? variant === "ghost";
+  const showChevron = (chevron ?? variant === "ghost") && !arrow;
   const classes = cn(
     base,
     pill ? "rounded-pill" : "rounded-sm",
@@ -87,6 +90,12 @@ export function Button({
         <ChevronRight
           aria-hidden
           className="size-4 transition-transform duration-200 ease-out-expo group-hover/btn:translate-x-0.5 motion-reduce:transition-none motion-reduce:group-hover/btn:translate-x-0"
+        />
+      )}
+      {arrow && (
+        <ArrowUpRight
+          aria-hidden
+          className="size-4 transition-transform duration-200 ease-out-expo group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 motion-reduce:transition-none motion-reduce:group-hover/btn:translate-x-0 motion-reduce:group-hover/btn:translate-y-0"
         />
       )}
     </>

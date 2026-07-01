@@ -102,8 +102,19 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-soft: cubic-bezier(0.33, 1, 0.68, 1);
 
+  /* Continuous suburb marquee → animate-marquee utility (keyframes below). */
+  --animate-marquee: marquee 42s linear infinite;
+
   /* --- Layout --- */
   --container-page: 1200px; /* max content width → max-w-page */
+  --size-hero: min(84svh, 820px); /* full-bleed hero min-height */
+}
+
+/* Marquee track slides one full copy left; two copies make it seamless. */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 /* Motion durations — used in hand-written CSS/inline; JS mirrors them. */

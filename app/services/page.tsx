@@ -3,7 +3,7 @@ import { Section } from "@/components/ui/Section";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Button } from "@/components/ui/Button";
 import { ContactCta } from "@/components/sections/ContactCta";
-import { SERVICE_ICONS } from "@/components/ServiceIcon";
+import { ServiceGlyph } from "@/components/ServiceIcon";
 import { SERVICES } from "@/content/services";
 
 export const metadata: Metadata = {
@@ -25,7 +25,6 @@ export default function ServicesPage() {
       <Section>
         <div className="divide-y divide-line">
           {SERVICES.map((service) => {
-            const Icon = SERVICE_ICONS[service.icon];
             return (
               <article
                 key={service.slug}
@@ -34,8 +33,8 @@ export default function ServicesPage() {
               >
                 <div className="grid gap-6 lg:grid-cols-[1fr_2fr] lg:gap-12">
                   <div className="flex items-start gap-4">
-                    <span className="grid size-12 shrink-0 place-items-center rounded-sm bg-blue-tint text-blue">
-                      <Icon aria-hidden className="size-6" />
+                    <span className="grid size-12 shrink-0 place-items-center rounded-sm bg-blue-tint">
+                      <ServiceGlyph name={service.icon} className="size-6" />
                     </span>
                     <h2 className="text-h2 text-ink text-balance">{service.title}</h2>
                   </div>
