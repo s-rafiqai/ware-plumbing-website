@@ -1,38 +1,49 @@
+import Image from "next/image";
 import { cn } from "@/lib/cn";
 
+// Intrinsic size of the cropped logo asset (public/assets/logo).
+const LOGO_W = 1000;
+const LOGO_H = 555;
+
 interface LogoProps {
-  /** Use the white-on-dark treatment (for the ink footer). */
+  /**
+   * For dark surfaces (the ink footer): the logo has a white background, so it
+   * sits on a white chip rather than being recoloured.
+   */
   reversed?: boolean;
   className?: string;
+  /** Eagerly load (use in the header, where the logo is above the fold). */
+  priority?: boolean;
 }
 
-/**
- * Placeholder logo lockup: a monochrome "W" monogram + "Ware Plumbing" wordmark.
- *
- * TODO: replace with the final Ware Plumbing logo asset (SVG preferred) when
- * supplied — see brief §9. The design system's "WG" mark is only a reference;
- * keep the clear-space (≈ mark height) and ink / reversed-white colour rules.
- */
-export function Logo({ reversed, className }: LogoProps) {
+/** The Ware Plumbing and Roofing logo lockup. */
+export function Logo({ reversed, className, priority }: LogoProps) {
+  const img = (
+    <Image
+      src="/assets/logo/ware-plumbing-logo.png"
+      alt="Ware Plumbing and Roofing"
+      width={LOGO_W}
+      height={LOGO_H}
+      priority={priority}
+      sizes="220px"
+      className="h-full w-auto"
+    />
+  );
+
+  if (reversed) {
+    return (
+      <span
+        className={cn(
+          "inline-flex h-14 items-center rounded-sm bg-white px-3 py-2",
+          className,
+        )}
+      >
+        {img}
+      </span>
+    );
+  }
+
   return (
-    <span className={cn("inline-flex items-center gap-2.5", className)}>
-      <span
-        aria-hidden
-        className={cn(
-          "grid size-9 place-items-center rounded-sm text-lg font-extrabold",
-          reversed ? "bg-white text-ink" : "bg-ink text-white",
-        )}
-      >
-        W
-      </span>
-      <span
-        className={cn(
-          "text-h3 font-extrabold tracking-tight",
-          reversed ? "text-white" : "text-ink",
-        )}
-      >
-        Ware Plumbing
-      </span>
-    </span>
+    <span className={cn("inline-flex h-12 items-center", className)}>{img}</span>
   );
 }

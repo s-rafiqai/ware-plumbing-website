@@ -68,10 +68,9 @@ export function Header() {
           <div className="flex justify-start">
             <Link
               href="/"
-              aria-label="Ware Plumbing — home"
               className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2"
             >
-              <Logo />
+              <Logo priority />
             </Link>
           </div>
 
