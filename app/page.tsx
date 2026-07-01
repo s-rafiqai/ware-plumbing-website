@@ -1,52 +1,35 @@
-import { SITE } from "@/lib/site";
+import { Container } from "@/components/ui/Container";
+import { Button } from "@/components/ui/Button";
+import { PRIMARY_CTA, SITE } from "@/lib/site";
 
 /**
- * Phase 0/1 placeholder home page.
- *
- * Confirms the scaffold renders and that the design tokens (from the design
- * system PDF) and SITE config are wired up. The real homepage is built later.
+ * Placeholder home page. Confirms the shell (header, footer, tokens) and shows
+ * the button variants. The real homepage is built in Phase 3.
  */
 export default function Home() {
   return (
-    <main className="flex flex-1 items-center justify-center px-6 py-24">
-      <div className="w-full max-w-xl">
-        <p className="text-small font-medium uppercase tracking-wide text-blue">
-          Scaffold ready
+    <Container className="flex flex-1 flex-col justify-center py-24">
+      <div className="max-w-2xl">
+        <p className="text-small font-semibold uppercase tracking-wide text-blue">
+          Site shell ready
         </p>
-        <h1 className="mt-3 text-h1 text-ink sm:text-display">{SITE.name}</h1>
-        <p className="mt-4 text-h3 font-normal text-grey">{SITE.tagline}.</p>
+        <h1 className="mt-3 text-h1 text-ink sm:text-display text-balance">
+          Professional and affordable plumbing across Melbourne&rsquo;s South East
+        </h1>
+        <p className="mt-5 max-w-prose text-h3 font-normal text-ink-soft">
+          {SITE.description}
+        </p>
 
-        <dl className="mt-10 space-y-3 border-t border-line pt-8 text-ink">
-          <div className="flex gap-3">
-            <dt className="w-20 shrink-0 text-ink-soft">Phone</dt>
-            <dd>
-              <a className="hover:text-blue" href={SITE.phone.href}>
-                {SITE.phone.display}
-              </a>
-            </dd>
-          </div>
-          <div className="flex gap-3">
-            <dt className="w-20 shrink-0 text-ink-soft">Mobile</dt>
-            <dd>
-              <a className="hover:text-blue" href={SITE.mobile.href}>
-                {SITE.mobile.display}
-              </a>
-            </dd>
-          </div>
-          <div className="flex gap-3">
-            <dt className="w-20 shrink-0 text-ink-soft">Email</dt>
-            <dd>
-              <a className="hover:text-blue" href={SITE.email.href}>
-                {SITE.email.display}
-              </a>
-            </dd>
-          </div>
-          <div className="flex gap-3">
-            <dt className="w-20 shrink-0 text-ink-soft">Areas</dt>
-            <dd>{SITE.suburbs.join(", ")}</dd>
-          </div>
-        </dl>
+        <div className="mt-8 flex flex-wrap items-center gap-4">
+          <Button href={PRIMARY_CTA.href}>{PRIMARY_CTA.label}</Button>
+          <Button href={SITE.phone.href} variant="outline">
+            Call {SITE.phone.display}
+          </Button>
+          <Button href="/services" variant="ghost">
+            View our services
+          </Button>
+        </div>
       </div>
-    </main>
+    </Container>
   );
 }

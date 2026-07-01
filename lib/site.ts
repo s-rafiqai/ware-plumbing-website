@@ -85,3 +85,18 @@ export const SITE = {
   hours: "{{HOURS}}", // TODO: {{HOURS}}
   streetAddress: "{{STREET_ADDRESS}}", // TODO: {{STREET_ADDRESS}}
 } as const satisfies SiteConfig;
+
+export interface NavLink {
+  label: string;
+  href: string;
+}
+
+/** Primary navigation links (the "Get in touch" CTA is handled separately). */
+export const NAV_LINKS: readonly NavLink[] = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/services" },
+];
+
+/** The persistent primary call-to-action shown in the header and footer. */
+export const PRIMARY_CTA = { label: "Get in touch", href: "/contact" } as const;
