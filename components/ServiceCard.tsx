@@ -1,40 +1,21 @@
-import type { ComponentType, SVGProps } from "react";
 import Link from "next/link";
-import {
-  ChevronRight,
-  Droplet,
-  Waves,
-  ShowerHead,
-  Flame,
-  ThermometerSun,
-  Wrench,
-  House,
-} from "lucide-react";
-import type { Service, ServiceIconName } from "@/content/services";
-
-/** Maps a service's icon key to its Lucide icon (explicit, so it tree-shakes). */
-const ICONS: Record<ServiceIconName, ComponentType<SVGProps<SVGSVGElement>>> = {
-  droplet: Droplet,
-  waves: Waves,
-  shower: ShowerHead,
-  flame: Flame,
-  thermometer: ThermometerSun,
-  wrench: Wrench,
-  roof: House,
-};
+import { ChevronRight } from "lucide-react";
+import type { Service } from "@/content/services";
+import { SERVICE_ICONS } from "@/components/ServiceIcon";
 
 interface ServiceCardProps {
   service: Service;
-  /** Where the card links (defaults to the services page). */
+  /** Where the card links (defaults to the service's section on the services page). */
   href?: string;
 }
 
 /** Service summary card: focal blue icon, title, teaser and a "learn more" cue. */
-export function ServiceCard({ service, href = "/services" }: ServiceCardProps) {
-  const Icon = ICONS[service.icon];
+export function ServiceCard({ service, href }: ServiceCardProps) {
+  const Icon = SERVICE_ICONS[service.icon];
+  const target = href ?? `/services#${service.slug}`;
   return (
     <Link
-      href={href}
+      href={target}
       className="group flex h-full flex-col rounded-md border border-line bg-white p-6 transition-shadow hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2"
     >
       <span className="grid size-12 place-items-center rounded-sm bg-blue-tint text-blue">
