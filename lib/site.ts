@@ -86,6 +86,11 @@ export const SITE = {
   streetAddress: "{{STREET_ADDRESS}}", // TODO: {{STREET_ADDRESS}}
 } as const satisfies SiteConfig;
 
+/** True while a value is still an unresolved `{{TOKEN}}` from the brief (§9). */
+export function isPlaceholder(value: string): boolean {
+  return value.startsWith("{{");
+}
+
 export interface NavLink {
   label: string;
   href: string;

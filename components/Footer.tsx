@@ -4,12 +4,7 @@ import { Phone, Smartphone, Mail, MapPin, Clock } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Logo } from "@/components/Logo";
-import { NAV_LINKS, PRIMARY_CTA, SITE } from "@/lib/site";
-
-/** Unresolved brief placeholders render as a muted note rather than a raw token. */
-function isPlaceholder(value: string): boolean {
-  return value.startsWith("{{");
-}
+import { isPlaceholder, NAV_LINKS, PRIMARY_CTA, SITE } from "@/lib/site";
 
 /** Brand glyphs (Feather-style) — lucide dropped brand icons, so inline them. */
 function FacebookGlyph(props: SVGProps<SVGSVGElement>) {
