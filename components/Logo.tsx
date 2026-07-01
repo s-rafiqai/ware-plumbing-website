@@ -1,15 +1,15 @@
 import Image from "next/image";
 import { cn } from "@/lib/cn";
 
-// Intrinsic sizes of the transparent logo assets (public/assets/logo).
+// Intrinsic sizes of the transparent logo assets.
 const ASSETS = {
-  monogram: { src: "/assets/logo/logo-wpr-monogram.png", w: 2030, h: 507 }, // ~4:1
+  mark: { src: "/icon-192.png", w: 192, h: 192 }, // droplet mark (matches favicon)
   lockup: { src: "/assets/logo/logo-full-lockup.png", w: 2030, h: 974 }, // ~2:1
 } as const;
 
 interface LogoProps {
-  /** `monogram` (wide WPR mark) for the header; `lockup` (WPR + wordmark) elsewhere. */
-  variant?: "monogram" | "lockup";
+  /** `mark` (droplet) for the compact header; `lockup` (WPR + wordmark) elsewhere. */
+  variant?: "mark" | "lockup";
   /**
    * Sit the logo on a white chip — for dark surfaces (the ink footer), since
    * the mark uses grey/blue that would lose contrast on ink.
@@ -23,7 +23,7 @@ interface LogoProps {
 
 /** The Ware Plumbing & Roofing logo (transparent PNG), sized via wrapper height. */
 export function Logo({
-  variant = "monogram",
+  variant = "mark",
   reversed,
   priority,
   className,
@@ -36,7 +36,7 @@ export function Logo({
       width={asset.w}
       height={asset.h}
       priority={priority}
-      sizes={variant === "monogram" ? "180px" : "120px"}
+      sizes={variant === "mark" ? "44px" : "120px"}
       className="h-full w-auto"
     />
   );
@@ -55,6 +55,6 @@ export function Logo({
   }
 
   return (
-    <span className={cn("inline-flex h-10 items-center", className)}>{img}</span>
+    <span className={cn("inline-flex h-11 items-center", className)}>{img}</span>
   );
 }
