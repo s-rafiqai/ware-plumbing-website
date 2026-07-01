@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Phone, Smartphone, Mail, MapPin, Clock, CalendarClock } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ContactForm } from "@/components/ContactForm";
+import { Reveal } from "@/components/motion/Reveal";
 import { isPlaceholder, SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -30,8 +32,8 @@ export default function ContactPage() {
 
       <Section>
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* Details */}
-          <div>
+          {/* Details + photographic panel */}
+          <Reveal>
             <h2 className="text-h3 text-ink">Contact details</h2>
             <ul className="mt-5 space-y-4">
               {CONTACT_ROWS.map((row) => {
@@ -88,10 +90,23 @@ export default function ContactPage() {
                 promptly.
               </p>
             </div>
-          </div>
+
+            <div className="relative mt-8 aspect-[16/10] overflow-hidden rounded-md">
+              <Image
+                src="/assets/photos/hero-plumber.png"
+                alt="" /* decorative */
+                fill
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="object-cover"
+              />
+            </div>
+          </Reveal>
 
           {/* Form */}
-          <div className="rounded-md border border-line bg-white p-6 shadow-sm sm:p-8">
+          <Reveal
+            delay={0.1}
+            className="h-max rounded-md border border-line bg-white p-6 shadow-sm sm:p-8"
+          >
             <h2 className="text-h3 text-ink">Get a free quote</h2>
             <p className="mt-2 text-body text-ink-soft">
               Send us a few details and we&rsquo;ll get back to you.
@@ -99,7 +114,7 @@ export default function ContactPage() {
             <div className="mt-6">
               <ContactForm />
             </div>
-          </div>
+          </Reveal>
         </div>
       </Section>
     </>

@@ -75,7 +75,7 @@ export function FullBleedImage({
       {scrim && (
         <div
           aria-hidden
-          className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/45 to-ink/20"
+          className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/60 to-ink/35"
         />
       )}
 
