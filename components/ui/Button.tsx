@@ -42,6 +42,8 @@ interface CommonProps {
   chevron?: boolean;
   /** Show a trailing outward arrow (↗) that lifts up-right on hover. */
   arrow?: boolean;
+  /** Accessible name — for icon-only or short-text CTAs. */
+  "aria-label"?: string;
   className?: string;
   children: ReactNode;
 }
@@ -104,12 +106,13 @@ export function Button({
   // Link form: `href` is present.
   if (typeof rest.href === "string") {
     const { href } = rest;
+    const ariaLabel = (rest as { "aria-label"?: string })["aria-label"];
     return isNonRouteHref(href) ? (
-      <a href={href} className={classes}>
+      <a href={href} aria-label={ariaLabel} className={classes}>
         {content}
       </a>
     ) : (
-      <Link href={href} className={classes}>
+      <Link href={href} aria-label={ariaLabel} className={classes}>
         {content}
       </Link>
     );

@@ -7,6 +7,7 @@ import {
   type BookAction,
   type BookState,
 } from "@/lib/book/state";
+import type { Details } from "@/lib/book/schema";
 
 interface BookContextValue {
   state: BookState;
@@ -15,8 +16,17 @@ interface BookContextValue {
 
 const BookContext = createContext<BookContextValue | null>(null);
 
-export function BookProvider({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(bookReducer, initialBookState);
+export function BookProvider({
+  children,
+  initialDetails,
+}: {
+  children: ReactNode;
+  /** Pre-filled Step 3 fields from a deep-link (?service=/?suburb=). */
+  initialDetails?: Partial<Details>;
+}) {
+  const [state, dispatch] = useReducer(bookReducer, initialBookState, (init) =>
+    initialDetails ? { ...init, details: { ...init.details, ...initialDetails } } : init,
+  );
   return (
     <BookContext.Provider value={{ state, dispatch }}>
       {children}

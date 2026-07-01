@@ -1,5 +1,6 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { StickyCtaBar } from "@/components/StickyCtaBar";
 
 /** Marketing chrome: header + footer around the page content. */
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
@@ -17,6 +18,9 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
         {children}
       </main>
       <Footer />
+      {/* Spacer so the fixed mobile bar never covers footer content. */}
+      <div aria-hidden className="h-16 md:hidden" />
+      <StickyCtaBar />
     </>
   );
 }

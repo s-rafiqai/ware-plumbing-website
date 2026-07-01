@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/sections/Hero";
 import { TrustBadges } from "@/components/sections/TrustBadges";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
+import { BookCtaBand } from "@/components/sections/BookCtaBand";
 import { StatBand } from "@/components/sections/StatBand";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { ContactCta } from "@/components/sections/ContactCta";
@@ -17,6 +18,7 @@ export default function Home() {
       <Hero />
       <TrustBadges />
       <ServicesGrid />
+      <BookCtaBand />
       <StatBand />
       <Testimonials />
 

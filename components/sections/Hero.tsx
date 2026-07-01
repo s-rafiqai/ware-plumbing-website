@@ -2,7 +2,7 @@ import Image from "next/image";
 import { FullBleedImage } from "@/components/ui/FullBleedImage";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { PRIMARY_CTA, SITE } from "@/lib/site";
+import { BOOK_CTA, SITE } from "@/lib/site";
 
 /**
  * Homepage hero — the single dark full-bleed photographic moment (signature #1).
@@ -43,8 +43,8 @@ export function Hero() {
             dripping tap to a burst pipe, no job is too big or small.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
-            <Button href={PRIMARY_CTA.href} size="lg">
-              {PRIMARY_CTA.label}
+            <Button href={BOOK_CTA.href} size="lg">
+              Book a service
             </Button>
             <Button href={SITE.phone.href} variant="outline" size="lg">
               Call {SITE.phone.display}

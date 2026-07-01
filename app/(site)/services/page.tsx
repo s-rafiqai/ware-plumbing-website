@@ -8,6 +8,7 @@ import { ContactCta } from "@/components/sections/ContactCta";
 import { Reveal } from "@/components/motion/Reveal";
 import { ServiceGlyph } from "@/components/ServiceIcon";
 import { SERVICES } from "@/content/services";
+import { bookHref } from "@/lib/book/services";
 import { PRIMARY_CTA, SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -69,9 +70,14 @@ export default function ServicesPage() {
                   <p className="text-body text-ink-soft text-pretty">
                     {service.description}
                   </p>
-                  <Button href="/contact" variant="ghost" arrow className="mt-4">
-                    Get a quote
-                  </Button>
+                  <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
+                    <Button href={bookHref(service.bookSlug)}>
+                      Book {service.title}
+                    </Button>
+                    <Button href="/contact" variant="ghost" arrow>
+                      Get a quote
+                    </Button>
+                  </div>
                 </div>
               </article>
             </Reveal>

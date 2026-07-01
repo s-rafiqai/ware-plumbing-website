@@ -4,8 +4,9 @@ import { Phone, Smartphone, Mail, MapPin, Clock, CalendarClock } from "lucide-re
 import { Section } from "@/components/ui/Section";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ContactForm } from "@/components/ContactForm";
+import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/motion/Reveal";
-import { isPlaceholder, SITE } from "@/lib/site";
+import { BOOK_CTA, isPlaceholder, SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Get in touch",
@@ -80,15 +81,20 @@ export default function ContactPage() {
               </li>
             </ul>
 
-            {/* Booking anchor — brief §5 references an online booking enquiry. */}
-            {/* TODO: embed the booking widget here in the form-container style once details land. */}
-            <div className="mt-8 flex gap-3 rounded-md border border-line bg-surface p-5">
-              <CalendarClock aria-hidden className="size-5 shrink-0 text-blue" />
-              <p className="text-small text-ink-soft text-pretty">
-                <span className="font-semibold text-ink">Online booking is coming soon.</span>{" "}
-                For now, call us or send the form and we&rsquo;ll be in touch
-                promptly.
-              </p>
+            {/* Online booking is now live (the /book funnel). */}
+            <div className="mt-8 rounded-md border border-line bg-blue-tint p-6">
+              <div className="flex items-start gap-3">
+                <CalendarClock aria-hidden className="mt-0.5 size-5 shrink-0 text-blue" />
+                <div>
+                  <h3 className="text-h3 text-ink">Book online in under a minute</h3>
+                  <p className="mt-1 text-body text-ink-soft text-pretty">
+                    Pick a service and a time that suits — no phone tag.
+                  </p>
+                </div>
+              </div>
+              <Button href={BOOK_CTA.href} className="mt-4 w-full sm:w-auto">
+                {BOOK_CTA.label}
+              </Button>
             </div>
 
             <div className="relative mt-8 aspect-[16/10] overflow-hidden rounded-md">

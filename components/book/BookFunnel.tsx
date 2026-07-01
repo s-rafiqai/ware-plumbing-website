@@ -9,6 +9,7 @@ import { VerifyStep } from "@/components/book/steps/Verify";
 import { DetailsStep } from "@/components/book/steps/Details";
 import { PayStep } from "@/components/book/steps/Pay";
 import { Confirmation } from "@/components/book/steps/Confirmation";
+import type { Details } from "@/lib/book/schema";
 import { EASE_OUT_EXPO } from "@/lib/motion";
 
 function stepView(step: ReturnType<typeof useBook>["state"]["step"]) {
@@ -54,9 +55,9 @@ function FunnelInner() {
 }
 
 /** The whole /book funnel: provider + step orchestration with transitions. */
-export function BookFunnel() {
+export function BookFunnel({ initialDetails }: { initialDetails?: Partial<Details> }) {
   return (
-    <BookProvider>
+    <BookProvider initialDetails={initialDetails}>
       <FunnelInner />
     </BookProvider>
   );

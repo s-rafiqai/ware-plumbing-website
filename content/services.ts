@@ -23,11 +23,14 @@ export interface Service {
   summary: string;
   description: string;
   icon: ServiceIconName;
+  /** Deep-link slug into the booking funnel (see lib/book/services). */
+  bookSlug: string;
 }
 
 export const SERVICES: readonly Service[] = [
   {
     slug: "water-leaks",
+    bookSlug: "general",
     title: "Water leaks",
     summary:
       "Dripping taps and leaks fixed fast — before they mean water stains, damage and higher bills.",
@@ -37,6 +40,7 @@ export const SERVICES: readonly Service[] = [
   },
   {
     slug: "drain-cleaning-cctv",
+    bookSlug: "blocked-drains",
     title: "Drain cleaning & CCTV",
     summary:
       "High-pressure jetting and CCTV inspection to clear blockages and check the condition of your drains.",
@@ -46,6 +50,7 @@ export const SERVICES: readonly Service[] = [
   },
   {
     slug: "taps-toilet-repairs",
+    bookSlug: "taps-toilets",
     title: "Taps & toilet repairs",
     summary:
       "Fast repairs for running, blocked or broken toilets and taps — with honest, upfront quotes.",
@@ -55,6 +60,7 @@ export const SERVICES: readonly Service[] = [
   },
   {
     slug: "gas-fitting-repairs",
+    bookSlug: "gas-fitting",
     title: "Gas fitting & repairs",
     summary:
       "Safe, licensed gas fitting, servicing and repairs — from quoting through to completion.",
@@ -64,6 +70,7 @@ export const SERVICES: readonly Service[] = [
   },
   {
     slug: "hot-water-systems",
+    bookSlug: "hot-water",
     title: "Hot water systems",
     summary:
       "Repairs to all brands and models of hot water systems, done properly so you're not left cold.",
@@ -73,6 +80,7 @@ export const SERVICES: readonly Service[] = [
   },
   {
     slug: "burst-pipe-repairs",
+    bookSlug: "burst-pipe",
     title: "Burst pipe location & repairs",
     summary:
       "Rapid location and repair of burst and concealed pipes to prevent costly water damage.",
@@ -82,6 +90,7 @@ export const SERVICES: readonly Service[] = [
   },
   {
     slug: "roofing-repairs",
+    bookSlug: "roofing",
     title: "Roofing & repairs",
     summary:
       "Roof repairs, replacement, restoration and roof plumbing to keep your property watertight.",

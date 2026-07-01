@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { Menu, Phone, X } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Logo } from "@/components/Logo";
-import { NAV_LINKS, PRIMARY_CTA } from "@/lib/site";
+import { BOOK_CTA, NAV_LINKS, SITE } from "@/lib/site";
 import { cn } from "@/lib/cn";
 import { EASE_OUT_EXPO } from "@/lib/motion";
 
@@ -101,11 +101,20 @@ export function Header() {
             })}
           </nav>
 
-          {/* Right: action + mobile toggle */}
+          {/* Right: call (secondary) + book (primary) + mobile toggle */}
           <div className="flex items-center justify-end gap-2">
-            <div className="hidden md:block">
-              <Button href={PRIMARY_CTA.href} variant="outline" pill>
-                {PRIMARY_CTA.label}
+            <div className="hidden items-center gap-2 md:flex">
+              <Button
+                href={SITE.phone.href}
+                variant="outline"
+                pill
+                aria-label={`Call ${SITE.phone.display}`}
+              >
+                <Phone aria-hidden className="size-4 text-blue" />
+                <span className="hidden lg:inline">{SITE.phone.display}</span>
+              </Button>
+              <Button href={BOOK_CTA.href} pill>
+                {BOOK_CTA.label}
               </Button>
             </div>
             <button
@@ -158,9 +167,12 @@ export function Header() {
                     </li>
                   );
                 })}
-                <li className="px-2 py-3">
-                  <Button href={PRIMARY_CTA.href} variant="primary" className="w-full">
-                    {PRIMARY_CTA.label}
+                <li className="space-y-2 px-2 py-3">
+                  <Button href={BOOK_CTA.href} variant="primary" className="w-full">
+                    {BOOK_CTA.label}
+                  </Button>
+                  <Button href={SITE.phone.href} variant="outline" className="w-full">
+                    Call {SITE.phone.display}
                   </Button>
                 </li>
               </ul>

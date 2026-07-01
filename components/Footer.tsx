@@ -4,7 +4,7 @@ import { Phone, Smartphone, Mail, MapPin, Clock } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Logo } from "@/components/Logo";
-import { isPlaceholder, NAV_LINKS, PRIMARY_CTA, SITE } from "@/lib/site";
+import { BOOK_CTA, isPlaceholder, NAV_LINKS, SITE } from "@/lib/site";
 
 /** Brand glyphs (Feather-style) — lucide dropped brand icons, so inline them. */
 function FacebookGlyph(props: SVGProps<SVGSVGElement>) {
@@ -85,7 +85,7 @@ export function Footer() {
           <nav aria-label="Footer" className="space-y-4">
             <ColumnHeading>Explore</ColumnHeading>
             <ul className="space-y-2.5">
-              {[...NAV_LINKS, PRIMARY_CTA].map((link) => (
+              {[...NAV_LINKS, BOOK_CTA].map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
@@ -139,8 +139,8 @@ export function Footer() {
               Trusted across {SITE.suburbs.slice(0, -1).join(", ")} and{" "}
               {SITE.suburbs[SITE.suburbs.length - 1]}.
             </p>
-            <Button href={PRIMARY_CTA.href} variant="primary" size="sm">
-              {PRIMARY_CTA.label}
+            <Button href={BOOK_CTA.href} variant="primary" size="sm">
+              {BOOK_CTA.label}
             </Button>
           </div>
         </div>

@@ -105,12 +105,16 @@ export interface NavLink {
   href: string;
 }
 
-/** Primary navigation links (the "Get in touch" CTA is handled separately). */
+/** Primary navigation links. */
 export const NAV_LINKS: readonly NavLink[] = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
+  { label: "Contact", href: "/contact" },
 ];
 
-/** The persistent primary call-to-action shown in the header and footer. */
+/** The "Get in touch" (contact) CTA, used in the hero and contact band. */
 export const PRIMARY_CTA = { label: "Get in touch", href: "/contact" } as const;
+
+/** The online-booking CTA — the primary conversion action across the site. */
+export const BOOK_CTA = { label: "Book online", href: "/book" } as const;

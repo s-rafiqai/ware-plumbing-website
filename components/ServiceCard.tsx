@@ -2,36 +2,35 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import type { Service } from "@/content/services";
 import { ServiceGlyph } from "@/components/ServiceIcon";
+import { Button } from "@/components/ui/Button";
+import { bookHref } from "@/lib/book/services";
 import { cn } from "@/lib/cn";
 
 interface ServiceCardProps {
   service: Service;
-  /** Where the card links (defaults to the service's section on the services page). */
+  /** Where the title/card links (defaults to the service's section). */
   href?: string;
   /** Larger treatment for the bento feature card. */
   featured?: boolean;
 }
 
 /**
- * Service card: brand glyph, title, teaser, and an outward-arrow affordance that
- * surfaces on hover. The whole card lifts on hover (transform + shadow). Used at
- * two sizes so the services grid can read as a bento rather than a flat grid.
+ * Service card. The title is a stretched link over the whole card (→ services
+ * page); the "Book" button sits above it (z-10) and deep-links into the funnel
+ * with this service pre-selected — two actions, no nested interactive elements.
  */
 export function ServiceCard({ service, href, featured }: ServiceCardProps) {
   const target = href ?? `/services#${service.slug}`;
   return (
-    <Link
-      href={target}
+    <article
       className={cn(
         "group relative flex h-full flex-col rounded-md border border-line bg-white",
         "transition-[transform,box-shadow,border-color] duration-200 ease-out-expo",
-        "hover:-translate-y-1 hover:border-blue/30 hover:shadow-md",
-        "motion-reduce:hover:translate-y-0",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2",
+        "hover:-translate-y-1 hover:border-blue/30 hover:shadow-md motion-reduce:hover:translate-y-0",
+        "focus-within:ring-2 focus-within:ring-blue focus-within:ring-offset-2",
         featured ? "p-8" : "p-6",
       )}
     >
-      {/* Outward-arrow affordance: fades/lifts in on hover, always shown under reduced motion. */}
       <ArrowUpRight
         aria-hidden
         className="absolute right-5 top-5 size-5 text-grey opacity-0 transition-[transform,opacity,color] duration-200 ease-out-expo group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-blue group-hover:opacity-100 motion-reduce:transition-none motion-reduce:opacity-100"
@@ -45,7 +44,12 @@ export function ServiceCard({ service, href, featured }: ServiceCardProps) {
         <ServiceGlyph name={service.icon} className={featured ? "size-7" : "size-6"} />
       </span>
       <h3 className={cn("mt-5 text-ink", featured ? "text-h2" : "text-h3")}>
-        {service.title}
+        <Link
+          href={target}
+          className="rounded-sm after:absolute after:inset-0 focus:outline-none"
+        >
+          {service.title}
+        </Link>
       </h3>
       <p
         className={cn(
@@ -55,6 +59,15 @@ export function ServiceCard({ service, href, featured }: ServiceCardProps) {
       >
         {service.summary}
       </p>
-    </Link>
+      <div className="relative z-10 mt-5">
+        <Button
+          href={bookHref(service.bookSlug)}
+          size="sm"
+          aria-label={`Book ${service.title}`}
+        >
+          Book now
+        </Button>
+      </div>
+    </article>
   );
 }

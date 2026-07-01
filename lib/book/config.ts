@@ -75,5 +75,11 @@ export function isServicedSuburb(value: string): boolean {
   return SERVICE_SUBURBS.some((s) => s.toLowerCase() === v);
 }
 
+/** Canonical-cased suburb name if serviced, else undefined (for deep-links). */
+export function canonicalSuburb(value: string): string | undefined {
+  const v = value.trim().toLowerCase();
+  return SERVICE_SUBURBS.find((s) => s.toLowerCase() === v);
+}
+
 /** Seconds before the "Resend code" control re-enables. */
 export const RESEND_SECONDS = 30;
