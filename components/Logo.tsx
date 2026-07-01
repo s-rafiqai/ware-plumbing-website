@@ -1,31 +1,42 @@
 import Image from "next/image";
 import { cn } from "@/lib/cn";
 
-// Intrinsic size of the cropped logo asset (public/assets/logo).
-const LOGO_W = 1000;
-const LOGO_H = 555;
+// Intrinsic sizes of the transparent logo assets (public/assets/logo).
+const ASSETS = {
+  monogram: { src: "/assets/logo/logo-wpr-monogram.png", w: 2030, h: 507 }, // ~4:1
+  lockup: { src: "/assets/logo/logo-full-lockup.png", w: 2030, h: 974 }, // ~2:1
+} as const;
 
 interface LogoProps {
+  /** `monogram` (wide WPR mark) for the header; `lockup` (WPR + wordmark) elsewhere. */
+  variant?: "monogram" | "lockup";
   /**
-   * For dark surfaces (the ink footer): the logo has a white background, so it
-   * sits on a white chip rather than being recoloured.
+   * Sit the logo on a white chip — for dark surfaces (the ink footer), since
+   * the mark uses grey/blue that would lose contrast on ink.
    */
   reversed?: boolean;
-  className?: string;
-  /** Eagerly load (use in the header, where the logo is above the fold). */
+  /** Eagerly load (header — above the fold). */
   priority?: boolean;
+  /** Wrapper classes; height controls the rendered size. */
+  className?: string;
 }
 
-/** The Ware Plumbing and Roofing logo lockup. */
-export function Logo({ reversed, className, priority }: LogoProps) {
+/** The Ware Plumbing & Roofing logo (transparent PNG), sized via wrapper height. */
+export function Logo({
+  variant = "monogram",
+  reversed,
+  priority,
+  className,
+}: LogoProps) {
+  const asset = ASSETS[variant];
   const img = (
     <Image
-      src="/assets/logo/ware-plumbing-logo.png"
-      alt="Ware Plumbing and Roofing"
-      width={LOGO_W}
-      height={LOGO_H}
+      src={asset.src}
+      alt="Ware Plumbing & Roofing"
+      width={asset.w}
+      height={asset.h}
       priority={priority}
-      sizes="220px"
+      sizes={variant === "monogram" ? "180px" : "120px"}
       className="h-full w-auto"
     />
   );
@@ -44,6 +55,6 @@ export function Logo({ reversed, className, priority }: LogoProps) {
   }
 
   return (
-    <span className={cn("inline-flex h-12 items-center", className)}>{img}</span>
+    <span className={cn("inline-flex h-10 items-center", className)}>{img}</span>
   );
 }

@@ -52,7 +52,7 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand + socials */}
           <div className="space-y-4">
-            <Logo reversed />
+            <Logo variant="lockup" reversed />
             <p className="max-w-xs text-body text-white/70">
               Family-run plumbing serving Melbourne&rsquo;s South East for over 30
               years. Reliable, professional and local.

@@ -66,8 +66,22 @@ export function Hero() {
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
           {/* Copy */}
           <div>
+            {/* Brand lockup — modest, reads as a mark, not a second header. */}
+            <motion.div {...rise(0)} className="mb-6">
+              {/* Decorative: the header home-link already names the business,
+                  so this instance is alt="" to avoid a double announcement. */}
+              <Image
+                src="/assets/logo/logo-full-lockup.png"
+                alt=""
+                width={2030}
+                height={974}
+                priority
+                sizes="200px"
+                className="h-auto w-[150px] sm:w-[176px] lg:w-[200px]"
+              />
+            </motion.div>
             <motion.p
-              {...rise(0)}
+              {...rise(0.05)}
               className="text-small font-semibold uppercase tracking-wide text-blue"
             >
               Melbourne&rsquo;s South East · 30+ years
