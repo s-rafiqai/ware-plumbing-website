@@ -1,6 +1,6 @@
 import { TOTAL_STEPS } from "@/lib/book/state";
 
-const LABELS = ["Mobile", "Verify", "Job details", "Confirm & pay"];
+const LABELS = ["Mobile", "Verify", "Job details", "Confirm"];
 
 /** "Step X of 4" with a blue progress bar. */
 export function StepIndicator({ current }: { current: number }) {

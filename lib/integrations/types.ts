@@ -1,5 +1,4 @@
 import type { BookingPayload } from "@/lib/book/schema";
-import type { Card } from "@/lib/book/schema";
 
 /** SMS verification (demo: in-memory code; real: Twilio Verify). */
 export interface SmsProvider {
@@ -7,17 +6,6 @@ export interface SmsProvider {
   verifyCode(mobile: string, code: string): Promise<{ ok: boolean }>;
   /** Demo-only: reveal the code for the on-screen hint/autofill. */
   peekCode?(mobile: string): string | undefined;
-}
-
-/** Card payment (demo: always-succeed mock; real: Stripe). */
-export interface PaymentIntent {
-  id: string;
-  amount: number; // dollars
-  clientSecret?: string;
-}
-export interface PaymentProvider {
-  createIntent(amountDollars: number): Promise<PaymentIntent>;
-  confirm(intentId: string, card: Card): Promise<{ ok: boolean; last4?: string }>;
 }
 
 /** Job dispatch (demo: log payload; real: POST to the Fergus Zapier webhook). */

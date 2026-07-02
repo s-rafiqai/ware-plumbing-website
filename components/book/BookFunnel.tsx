@@ -7,7 +7,7 @@ import { StepIndicator } from "@/components/book/StepIndicator";
 import { MobileStep } from "@/components/book/steps/Mobile";
 import { VerifyStep } from "@/components/book/steps/Verify";
 import { DetailsStep } from "@/components/book/steps/Details";
-import { PayStep } from "@/components/book/steps/Pay";
+import { ReviewStep } from "@/components/book/steps/Review";
 import { Confirmation } from "@/components/book/steps/Confirmation";
 import type { Details } from "@/lib/book/schema";
 import { EASE_OUT_EXPO } from "@/lib/motion";
@@ -21,7 +21,7 @@ function stepView(step: ReturnType<typeof useBook>["state"]["step"]) {
     case 3:
       return <DetailsStep />;
     case 4:
-      return <PayStep />;
+      return <ReviewStep />;
     case "done":
       return <Confirmation />;
   }

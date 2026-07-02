@@ -36,35 +36,16 @@ export const detailsSchema = z.object({
 });
 export type Details = z.infer<typeof detailsSchema>;
 
-/** Demo card validation — formats only (never a real charge). */
-export const cardSchema = z.object({
-  cardNumber: z
-    .string()
-    .transform((v) => v.replace(/\s+/g, ""))
-    .refine((v) => /^\d{13,19}$/.test(v), "Enter a valid card number"),
-  expiry: z
-    .string()
-    .refine((v) => /^(0[1-9]|1[0-2])\s*\/\s*\d{2}$/.test(v), "MM/YY"),
-  cvc: z.string().refine((v) => /^\d{3,4}$/.test(v), "3–4 digits"),
-});
-export type Card = z.infer<typeof cardSchema>;
-
 /**
  * The full booking payload — what the server validates and the job provider
  * receives (this is the exact JSON shown on /debug and, when live, POSTed to
- * the Fergus Zap). Card details are intentionally NOT here: payment is handled
- * by the payment provider, never sent to the job provider.
+ * the Fergus Zap).
  */
 export const bookingPayloadSchema = z.object({
   mobile: mobileSchema,
   mobileVerified: z.literal(true),
   details: detailsSchema,
   photos: z.array(z.string()).default([]),
-  payment: z.object({
-    mode: z.enum(["deposit", "prepay", "card_on_file"]),
-    amount: z.number().int().nonnegative(), // dollars
-    status: z.enum(["captured", "authorised", "skipped"]),
-  }),
   source: z.literal("web-booking-funnel").default("web-booking-funnel"),
 });
 export type BookingPayload = z.infer<typeof bookingPayloadSchema>;

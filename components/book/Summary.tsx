@@ -12,14 +12,8 @@ function Row({ label, value }: { label: string; value: ReactNode }) {
   );
 }
 
-/** Read-only booking summary, used on the pay step and the confirmation. */
-export function Summary({
-  state,
-  paymentLine,
-}: {
-  state: BookState;
-  paymentLine?: string;
-}) {
+/** Read-only booking summary, used on the review step and the confirmation. */
+export function Summary({ state }: { state: BookState }) {
   const d = state.details;
   return (
     <dl className="rounded-md border border-line bg-white px-5">
@@ -44,7 +38,6 @@ export function Summary({
         label="Photos"
         value={state.photos.length > 0 ? `${state.photos.length} attached` : undefined}
       />
-      <Row label="Payment" value={paymentLine} />
     </dl>
   );
 }

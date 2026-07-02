@@ -1,4 +1,3 @@
-import type { PaymentMode } from "@/lib/book/config";
 import type { BookingPayload, Details } from "@/lib/book/schema";
 
 export type Step = 1 | 2 | 3 | 4 | "done";
@@ -8,13 +7,6 @@ export interface PhotoRef {
   name: string;
   /** Object URL for local preview only (never uploaded in demo). */
   url: string;
-}
-
-export interface PaymentResult {
-  status: "captured" | "authorised" | "skipped";
-  mode: PaymentMode;
-  amount: number;
-  last4?: string;
 }
 
 export interface Confirmation {
@@ -29,7 +21,6 @@ export interface BookState {
   mobileVerified: boolean;
   details: Partial<Details>;
   photos: PhotoRef[];
-  payment: PaymentResult | null;
   confirmation: Confirmation | null;
 }
 
@@ -39,7 +30,6 @@ export const initialBookState: BookState = {
   mobileVerified: false,
   details: {},
   photos: [],
-  payment: null,
   confirmation: null,
 };
 
@@ -48,7 +38,6 @@ export type BookAction =
   | { type: "MOBILE_VERIFIED" }
   | { type: "SET_DETAILS"; details: Partial<Details> }
   | { type: "SET_PHOTOS"; photos: PhotoRef[] }
-  | { type: "SET_PAYMENT"; payment: PaymentResult }
   | { type: "CONFIRM"; confirmation: Confirmation }
   | { type: "GOTO"; step: Step }
   | { type: "RESET" };
@@ -64,8 +53,6 @@ export function bookReducer(state: BookState, action: BookAction): BookState {
       return { ...state, details: { ...state.details, ...action.details } };
     case "SET_PHOTOS":
       return { ...state, photos: action.photos };
-    case "SET_PAYMENT":
-      return { ...state, payment: action.payment };
     case "CONFIRM":
       return { ...state, confirmation: action.confirmation, step: "done" };
     case "GOTO":

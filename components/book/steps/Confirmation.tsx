@@ -6,7 +6,6 @@ import { motion, useReducedMotion } from "motion/react";
 import { useBook } from "@/components/book/BookProvider";
 import { Summary } from "@/components/book/Summary";
 import { Button } from "@/components/ui/Button";
-import { paymentLabel } from "@/lib/book/config";
 import { DEMO_MODE } from "@/lib/demo";
 import { EASE_OUT_EXPO } from "@/lib/motion";
 import { cn } from "@/lib/cn";
@@ -31,14 +30,6 @@ export function Confirmation() {
   }, [done, reduce]);
 
   const conf = state.confirmation;
-  const pay = state.payment;
-  const paymentLine = pay
-    ? pay.status === "captured"
-      ? `${paymentLabel(pay.mode)} — $${pay.amount} paid`
-      : pay.status === "authorised"
-        ? `${paymentLabel(pay.mode)}${pay.last4 ? ` — card ••${pay.last4}` : ""}`
-        : "No payment taken"
-    : undefined;
 
   return (
     <div className="rounded-md border border-line bg-white p-6 shadow-sm sm:p-8">
@@ -61,7 +52,7 @@ export function Confirmation() {
       </div>
 
       <div className="mt-6">
-        <Summary state={state} paymentLine={paymentLine} />
+        <Summary state={state} />
       </div>
 
       {/* Simulated downstream pipeline */}
