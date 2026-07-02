@@ -21,7 +21,7 @@ export function ContactCta() {
           </h2>
           <p className="mt-4 text-body text-white/70 text-pretty">
             Call us or send a message and our team will get back to you promptly
-            to sort out your plumbing — big or small.
+            to sort out your plumbing - big or small.
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-4">

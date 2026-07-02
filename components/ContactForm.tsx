@@ -124,7 +124,7 @@ export function ContactForm() {
           rows={4}
           value={values.message}
           onChange={(e) => setValues((v) => ({ ...v, message: e.target.value }))}
-          placeholder="Tell us about the job — the more detail, the better."
+          placeholder="Tell us about the job - the more detail, the better."
           className={`${fieldClass} mt-1.5 border-line`}
         />
       </div>

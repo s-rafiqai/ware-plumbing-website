@@ -35,7 +35,7 @@ export const SERVICES: readonly Service[] = [
     summary:
       "Dripping taps and leaks fixed fast - before they mean water stains, damage and higher bills.",
     description:
-      "When you've got a leaking tap in your kitchen or bathroom, you can hear the steady drip no matter what you're doing. Dripping taps can lead to water stains and, in the worst cases, even flooded bathrooms. It's extremely annoying, bad for the environment and can mean higher water bills. Our experienced Ware Plumbing technicians can make sure your taps are functioning correctly. Whether they're dripping, leaking around the handle, not opening completely to allow full water flow, or causing water hammer — we'll fix the problem.",
+      "When you've got a leaking tap in your kitchen or bathroom, you can hear the steady drip no matter what you're doing. Dripping taps can lead to water stains and, in the worst cases, even flooded bathrooms. It's extremely annoying, bad for the environment and can mean higher water bills. Our experienced Ware Plumbing technicians can make sure your taps are functioning correctly. Whether they're dripping, leaking around the handle, not opening completely to allow full water flow, or causing water hammer - we'll fix the problem.",
     icon: "droplet",
   },
   {
@@ -55,7 +55,7 @@ export const SERVICES: readonly Service[] = [
     summary:
       "Fast repairs for running, blocked or broken toilets and taps - with honest, upfront quotes.",
     description:
-      "Of all the breakdowns that might happen in your house, a toilet failing is probably the most inconvenient — and trying to fix it yourself isn't fun. Toilet cisterns involve a number of moving parts, and where there are moving parts, there is maintenance involved. A broken toilet can be a massive nuisance, but there's no need to put up with it. Our local Ware Plumbing technicians can quickly carry out any repairs and get your toilet running perfectly again. If it needs to be replaced, they'll provide you with an upfront and honest quote.",
+      "Of all the breakdowns that might happen in your house, a toilet failing is probably the most inconvenient - and trying to fix it yourself isn't fun. Toilet cisterns involve a number of moving parts, and where there are moving parts, there is maintenance involved. A broken toilet can be a massive nuisance, but there's no need to put up with it. Our local Ware Plumbing technicians can quickly carry out any repairs and get your toilet running perfectly again. If it needs to be replaced, they'll provide you with an upfront and honest quote.",
     icon: "shower",
   },
   {
@@ -65,7 +65,7 @@ export const SERVICES: readonly Service[] = [
     summary:
       "Safe, licensed gas fitting, servicing and repairs - from quoting through to completion.",
     description:
-      "If electrical appliances aren't meeting your home's standards, gas alternatives are another popular option. There are many reasons you might consider using gas in your household. Ware Plumbing, in Melbourne's South East, understands every aspect of gas fitting — from quoting through to completion. Our expert solutions can save you on installation and operating costs, while ensuring the safety of all pipes and fittings. We also offer gas servicing and maintenance, available at your request.",
+      "If electrical appliances aren't meeting your home's standards, gas alternatives are another popular option. There are many reasons you might consider using gas in your household. Ware Plumbing, in Melbourne's South East, understands every aspect of gas fitting - from quoting through to completion. Our expert solutions can save you on installation and operating costs, while ensuring the safety of all pipes and fittings. We also offer gas servicing and maintenance, available at your request.",
     icon: "flame",
   },
   {
