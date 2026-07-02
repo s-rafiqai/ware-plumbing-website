@@ -117,7 +117,7 @@
 
   /* --- Layout --- */
   --container-page: 1200px; /* max content width → max-w-page */
-  --size-hero: min(84svh, 820px); /* full-bleed hero min-height */
+  --size-hero: min(72svh, 660px); /* full-bleed hero min-height (round-2: more compact so the TrustBadges panel peeks on load) */
 }
 
 /* Marquee track slides one full copy left; two copies make it seamless. */

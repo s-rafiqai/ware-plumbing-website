@@ -21,17 +21,17 @@ import { BOOK_CTA, SITE } from "@/lib/site";
 export function Hero() {
   const reduce = useReducedMotion();
 
-  const logo = (
-    <Image
-      src="/assets/logo/logo-full-lockup.png"
-      alt="Ware Plumbing & Roofing"
-      width={2030}
-      height={974}
-      priority
-      sizes="(min-width: 1024px) 240px, (min-width: 640px) 208px, 176px"
-      className="h-auto w-[176px] drop-shadow-sm sm:w-[208px] lg:w-[240px]"
-    />
-  );
+const logo = (
+  <Image
+    src="/assets/logo/logo-full-lockup.png"
+    alt="Ware Plumbing & Roofing"
+    width={2030}
+    height={974}
+    priority
+    sizes="(min-width: 1024px) 420px, (min-width: 640px) 340px, 260px"
+    className="h-auto w-[260px] drop-shadow-sm sm:w-[340px] lg:w-[420px]"
+  />
+);
   const eyebrow = (
     <p className="mt-6 text-small font-semibold uppercase tracking-wide text-blue">
       Melbourne&rsquo;s South East · 30+ years
@@ -44,7 +44,7 @@ export function Hero() {
   );
   const subhead = (
     <p className="mt-5 max-w-xl text-lead text-white/85 text-pretty">
-      Family-run and serving the community for over 30 years — from a dripping tap
+      Family-run and serving the community for over 30 years - from a dripping tap
       to a burst pipe, no job is too big or small.
     </p>
   );
@@ -73,7 +73,7 @@ export function Hero() {
          (where little is cropped and the full composition shows). */
       imageClassName="object-left md:object-center"
     >
-      <Container className="w-full pb-14 pt-28 md:pb-20">
+      <Container className="w-full pb-14 pt-16 md:pb-20 md:pt-20">
         {reduce ? (
           <div className="max-w-2xl">
             {logo}
