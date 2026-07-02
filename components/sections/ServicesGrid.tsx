@@ -14,14 +14,13 @@ export function ServicesGrid() {
   return (
     <Section muted aria-labelledby="services-heading">
       <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
-        <Reveal>
-          <SectionHeading
-            id="services-heading"
-            eyebrow="What we do"
-            title="Plumbing services, big or small"
-            intro="Our qualified technicians consistently go above and beyond to make sure each job is done the right way, the first time."
-          />
-        </Reveal>
+        <SectionHeading
+          animate
+          id="services-heading"
+          eyebrow="What we do"
+          title="Plumbing services, big or small"
+          intro="Our qualified technicians consistently go above and beyond to make sure each job is done the right way, the first time."
+        />
         <Reveal className="hidden sm:block">
           <Button href="/services" variant="ghost" arrow>
             All services

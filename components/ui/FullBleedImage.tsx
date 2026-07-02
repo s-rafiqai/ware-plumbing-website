@@ -13,6 +13,12 @@ interface FullBleedImageProps {
   priority?: boolean;
   /** Scroll-driven scale 1→1.05 (transform only). Off under reduced motion. */
   scale?: boolean;
+  /**
+   * Scroll-driven parallax: the overlaid content drifts up as the section
+   * scrolls away, on a separate track from the image scale — a subtle depth
+   * cue. Transform only, off under reduced motion.
+   */
+  parallax?: boolean;
   /** Dark scrim for legibility of overlaid light text (bottom-weighted). */
   scrim?: boolean;
   /** Tailwind min-height class; defaults to the --size-hero token. */
@@ -36,6 +42,7 @@ export function FullBleedImage({
   alt,
   priority,
   scale,
+  parallax,
   scrim,
   minHeightClassName = "min-h-[var(--size-hero)]",
   sizes = "100vw",
@@ -50,7 +57,11 @@ export function FullBleedImage({
     offset: ["start start", "end start"],
   });
   const rawScale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
+  // Content drifts up ~64px as the hero scrolls away — a separate track from the
+  // image scale. Starts at identity (y:0) so it never gates paint of the text.
+  const rawContentY = useTransform(scrollYProgress, [0, 1], [0, -64]);
   const imgScale = scale && !reduce ? rawScale : 1;
+  const contentY = parallax && !reduce ? rawContentY : 0;
 
   return (
     <section
@@ -75,14 +86,17 @@ export function FullBleedImage({
       {scrim && (
         <div
           aria-hidden
-          className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/60 to-ink/35"
+          className="absolute inset-0 bg-gradient-to-t from-slate-deep/95 via-slate-deep/60 to-slate-deep/35"
         />
       )}
 
       {children && (
-        <div className={cn("relative z-10 flex flex-1 flex-col", contentClassName)}>
+        <motion.div
+          style={{ y: contentY }}
+          className={cn("relative z-10 flex flex-1 flex-col", contentClassName)}
+        >
           {children}
-        </div>
+        </motion.div>
       )}
     </section>
   );

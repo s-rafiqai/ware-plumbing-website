@@ -1,8 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 import type { Service } from "@/content/services";
 import { ServiceGlyph } from "@/components/ServiceIcon";
 import { Button } from "@/components/ui/Button";
+import { springSnappy } from "@/lib/motion";
 import { bookHref } from "@/lib/book/services";
 import { cn } from "@/lib/cn";
 
@@ -21,14 +25,19 @@ interface ServiceCardProps {
  */
 export function ServiceCard({ service, href, featured }: ServiceCardProps) {
   const target = href ?? `/services#${service.slug}`;
+  const reduce = useReducedMotion();
   return (
-    <article
+    <motion.article
+      whileHover={reduce ? undefined : { y: -6 }}
+      transition={springSnappy}
       className={cn(
-        "group relative flex h-full flex-col rounded-md border border-line bg-white",
-        "transition-[transform,box-shadow,border-color] duration-200 ease-out-expo",
-        "hover:-translate-y-1 hover:border-blue/30 hover:shadow-md motion-reduce:hover:translate-y-0",
+        "group relative flex h-full flex-col rounded-md border border-line surface-sheen",
+        // Colour/shadow stay CSS (soft curve); the lift is a gentle spring above.
+        "transition-[box-shadow,border-color] duration-200 ease-out-soft",
+        "hover:border-blue/30 hover:shadow-lg",
         "focus-within:ring-2 focus-within:ring-blue focus-within:ring-offset-2",
-        featured ? "p-8" : "p-6",
+        // The featured bento card rests higher than its neighbours.
+        featured ? "p-8 shadow-md" : "p-6 shadow-sm",
       )}
     >
       <ArrowUpRight
@@ -68,6 +77,6 @@ export function ServiceCard({ service, href, featured }: ServiceCardProps) {
           Book now
         </Button>
       </div>
-    </article>
+    </motion.article>
   );
 }

@@ -36,7 +36,7 @@ function MarqueeList({
  */
 export function Marquee({ items, className }: MarqueeProps) {
   return (
-    <div className={cn("group flex overflow-hidden", className)}>
+    <div className={cn("marquee-mask group flex overflow-hidden", className)}>
       <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused] motion-reduce:animate-none">
         <MarqueeList items={items} />
         <MarqueeList items={items} hidden />

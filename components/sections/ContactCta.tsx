@@ -10,8 +10,11 @@ import { PRIMARY_CTA, SITE } from "@/lib/site";
  */
 export function ContactCta() {
   return (
-    <Section aria-labelledby="cta-heading">
-      <Reveal className="rounded-md bg-ink px-6 py-12 text-white sm:px-12 sm:py-16">
+    <Section aria-labelledby="cta-heading" className="relative z-10">
+      {/* Panel lifts up over the suburb marquee above (depth seam) — the -mt
+          scales with the section's responsive top padding so the overlap stays
+          consistent across breakpoints. */}
+      <Reveal className="-mt-16 rounded-md surface-sheen-dark px-6 py-12 text-white shadow-lg md:-mt-24 sm:px-12 sm:py-16 lg:-mt-32">
         <div className="mx-auto max-w-2xl text-center">
           <h2 id="cta-heading" className="text-h2 text-white text-balance">
             Need a plumber in Melbourne&rsquo;s South East?

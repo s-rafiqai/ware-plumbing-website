@@ -47,7 +47,7 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-auto bg-ink text-white">
+    <footer className="mt-auto bg-slate-deep text-white">
       <Container className="py-16">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand + socials */}

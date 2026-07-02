@@ -22,10 +22,11 @@ export default function Home() {
       <StatBand />
       <Testimonials />
 
-      {/* Service-area marquee (signature #3) — full-bleed, suburbs auto-scroll. */}
+      {/* Service-area marquee (signature #3) — full-bleed, suburbs auto-scroll.
+          Extra bottom padding leaves room for the ContactCta panel to overlap. */}
       <section
         aria-labelledby="area-heading"
-        className="border-y border-line bg-surface py-8"
+        className="border-y border-line bg-surface pt-8 pb-16"
       >
         <Container>
           <h2

@@ -1,5 +1,6 @@
 import type { ElementType, ReactNode } from "react";
 import { Container } from "@/components/ui/Container";
+import { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { cn } from "@/lib/cn";
 
 /** Vertical rhythm presets — deliberate dynamic range between sections. */
@@ -59,6 +60,13 @@ interface SectionHeadingProps {
   /** Heading id, so a Section can reference it via aria-labelledby. */
   id?: string;
   className?: string;
+  /**
+   * Choreograph the block on scroll — eyebrow and intro fade while the title
+   * plays a line/clip reveal, staggered on one track. When set, the caller
+   * should NOT also wrap this in <Reveal>. Off by default (static markup) so
+   * existing callers are unchanged.
+   */
+  animate?: boolean;
 }
 
 /** Eyebrow + title (+ intro) block used to introduce a section. */
@@ -69,18 +77,42 @@ export function SectionHeading({
   centered,
   id,
   className,
+  animate = false,
 }: SectionHeadingProps) {
+  const wrapperClass = cn(
+    "max-w-2xl",
+    centered && "mx-auto text-center",
+    className,
+  );
+  const eyebrowEl = eyebrow && (
+    <p className="text-small font-semibold uppercase tracking-wide text-blue">
+      {eyebrow}
+    </p>
+  );
+  const titleEl = (
+    <h2 id={id} className="mt-3 text-h2 text-ink text-balance">
+      {title}
+    </h2>
+  );
+  const introEl = intro && (
+    <p className="mt-4 text-body text-ink-soft text-pretty">{intro}</p>
+  );
+
+  if (!animate) {
+    return (
+      <div className={wrapperClass}>
+        {eyebrowEl}
+        {titleEl}
+        {introEl}
+      </div>
+    );
+  }
+
   return (
-    <div className={cn("max-w-2xl", centered && "mx-auto text-center", className)}>
-      {eyebrow && (
-        <p className="text-small font-semibold uppercase tracking-wide text-blue">
-          {eyebrow}
-        </p>
-      )}
-      <h2 id={id} className="mt-3 text-h2 text-ink text-balance">
-        {title}
-      </h2>
-      {intro && <p className="mt-4 text-body text-ink-soft text-pretty">{intro}</p>}
-    </div>
+    <RevealGroup className={wrapperClass} stagger={0.08}>
+      {eyebrow && <RevealItem>{eyebrowEl}</RevealItem>}
+      <RevealItem variant="line">{titleEl}</RevealItem>
+      {intro && <RevealItem>{introEl}</RevealItem>}
+    </RevealGroup>
   );
 }

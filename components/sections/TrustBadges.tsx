@@ -11,14 +11,18 @@ const ICONS: Record<TrustIconName, ComponentType<SVGProps<SVGSVGElement>>> = {
   wrench: Wrench,
 };
 
-/** A slim, divided trust strip below the hero — deliberately not a card grid. */
+/**
+ * Trust strip below the hero — a lifted panel that overlaps the hero's bottom
+ * edge (depth seam #1) so the page opens with a layered composition rather than
+ * flat stacked bands. Layered shadow + cool sheen read it as a raised surface.
+ */
 export function TrustBadges() {
   return (
-    <Section space="tight" className="border-b border-line">
+    <Section space="tight" className="relative z-10">
       <RevealGroup
         as="ul"
         stagger={0.1}
-        className="grid gap-8 sm:grid-cols-3 sm:gap-0"
+        className="-mt-12 grid gap-8 rounded-md border border-line surface-sheen p-6 shadow-lg sm:-mt-20 sm:grid-cols-3 sm:gap-0 sm:p-8"
       >
         {TRUST_BADGES.map((badge, i) => {
           const Icon = ICONS[badge.icon];

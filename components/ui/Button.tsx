@@ -9,9 +9,11 @@ type Size = "sm" | "md" | "lg";
 // Real states, not just a colour swap: a small lift on hover (transform +
 // shadow) and a press on :active. Transform/shadow are GPU-friendly. The lift
 // is disabled under reduced motion; colour/shadow still respond.
+// The soft curve (ease-out-soft) drives the micro-interaction — buttons stay
+// CSS-driven and predictable (no spring lift near conversion), just gentler.
 const base =
   "group/btn inline-flex items-center justify-center gap-2 font-medium " +
-  "transition-[transform,box-shadow,background-color,border-color,color] duration-200 ease-out-expo " +
+  "transition-[transform,box-shadow,background-color,border-color,color] duration-200 ease-out-soft " +
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 " +
   "active:translate-y-0 active:duration-75 motion-reduce:transition-colors motion-reduce:hover:translate-y-0 " +
   "disabled:opacity-50 disabled:pointer-events-none";
@@ -91,13 +93,13 @@ export function Button({
       {showChevron && (
         <ChevronRight
           aria-hidden
-          className="size-4 transition-transform duration-200 ease-out-expo group-hover/btn:translate-x-0.5 motion-reduce:transition-none motion-reduce:group-hover/btn:translate-x-0"
+          className="size-4 transition-transform duration-200 ease-out-soft group-hover/btn:translate-x-0.5 motion-reduce:transition-none motion-reduce:group-hover/btn:translate-x-0"
         />
       )}
       {arrow && (
         <ArrowUpRight
           aria-hidden
-          className="size-4 transition-transform duration-200 ease-out-expo group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 motion-reduce:transition-none motion-reduce:group-hover/btn:translate-x-0 motion-reduce:group-hover/btn:translate-y-0"
+          className="size-4 transition-transform duration-200 ease-out-soft group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 motion-reduce:transition-none motion-reduce:group-hover/btn:translate-x-0 motion-reduce:group-hover/btn:translate-y-0"
         />
       )}
     </>

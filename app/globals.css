@@ -18,14 +18,21 @@
 
 @theme {
   /* --- Colour: core (design system §02) --- */
-  --color-ink: #16181d; /* headlines, body text, dark sections, logo */
+  --color-ink: #16181d; /* headlines, body text, logo */
   --color-blue: #2d7ff9; /* brand blue — primary actions, links, focal accent */
+  /* Deep cool slate for the dark bookends (hero scrim + ContactCta panel) —
+     calmer and cooler than near-black, still trustworthy, never saturated. */
+  --color-slate-deep: #10141d;
 
-  /* --- Colour: neutrals --- */
-  --color-ink-soft: #3a3f4a; /* secondary text; safe for <14px on white */
-  --color-grey: #6b7280; /* muted labels/metadata — NOT for text <14px */
-  --color-line: #e6e8ec; /* borders, dividers, field outlines */
-  --color-surface: #f5f6f8; /* off-white section backgrounds */
+  /* --- Colour: neutrals ---
+     Round-2: nudged toward a subtle cool (blue-grey) undertone for a fresh,
+     water-appropriate feel. Lightness held so WCAG AA contrast is preserved
+     (ink-soft ≈ 9:1, grey ≈ 5:1 on white). NOT clinical grey. */
+  --color-ink-soft: #374152; /* secondary text; safe for <14px on white */
+  --color-grey: #667085; /* muted labels/metadata — NOT for text <14px */
+  --color-line: #e2e7ef; /* borders, dividers, field outlines */
+  --color-surface: #f2f5f9; /* off-white section backgrounds (cool) */
+  --color-surface-2: #eaeff7; /* a cooler, slightly deeper elevated surface */
 
   /* --- Colour: blue range & support --- */
   --color-blue-dark: #1e63d0; /* blue hover / pressed */
@@ -89,10 +96,13 @@
   --radius-md: 12px; /* cards, containers */
   --radius-pill: 9999px; /* nav button, tags */
 
-  /* --- Elevation (§04 / §07) --- */
-  --shadow-sm: 0 1px 3px rgba(20, 24, 29, 0.06);
-  --shadow-md: 0 4px 14px rgba(20, 24, 29, 0.08);
-  --shadow-lg: 0 12px 32px rgba(20, 24, 29, 0.12);
+  /* --- Elevation (§04 / §07) ---
+     Round-2: layered ambient + key shadows with a faint cool (slate-blue) cast
+     — rgba(23,33,54,·) instead of pure black — so cards read "lifted" rather
+     than outlined. Kept restrained; no bling. */
+  --shadow-sm: 0 1px 2px rgba(23, 33, 54, 0.05), 0 1px 3px rgba(23, 33, 54, 0.05);
+  --shadow-md: 0 2px 4px rgba(23, 33, 54, 0.05), 0 8px 20px rgba(23, 33, 54, 0.07);
+  --shadow-lg: 0 4px 10px rgba(23, 33, 54, 0.05), 0 18px 40px rgba(23, 33, 54, 0.1);
   /* Brand-tinted lift for the primary button hover — reads warmer than grey. */
   --shadow-blue: 0 10px 24px -8px rgba(45, 127, 249, 0.5);
 
@@ -121,11 +131,89 @@
 :root {
   --dur-fast: 150ms;
   --dur: 300ms;
-  --dur-slow: 600ms;
+  --dur-slow: 600ms; /* mirrors DUR.slow (0.6s) in lib/motion.ts */
 }
 
 body {
   font-family: var(--font-sans);
   background: #ffffff; /* white primary background; use bg-surface for grey sections */
   color: var(--color-ink);
+}
+
+/* ============================================================================
+ *  SURFACE UTILITIES (round-2)
+ * ----------------------------------------------------------------------------
+ *  Restrained "premium surface" helpers — a faint cool top-lit sheen so cards
+ *  and the dark panel read as milled surfaces rather than flat fills. Colours
+ *  derive from @theme tokens via color-mix; no ad-hoc values.
+ * ========================================================================== */
+
+/* Light card sheen: a faint cool "frost" across the top edge fading to the
+   card's white fill — reads as a top-lit glass surface, not a flat fill. */
+@utility surface-sheen {
+  background-color: white;
+  background-image: linear-gradient(
+    180deg,
+    color-mix(in oklab, white, var(--color-blue) 4%) 0%,
+    transparent 55%
+  );
+}
+
+/* Dark panel sheen: a subtle top highlight over the deep slate bookend. */
+@utility surface-sheen-dark {
+  background-color: var(--color-slate-deep);
+  background-image: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--color-slate-deep), white 7%) 0%,
+    var(--color-slate-deep) 55%
+  );
+}
+
+/* ============================================================================
+ *  VIEW TRANSITIONS (round-2)
+ * ----------------------------------------------------------------------------
+ *  Next triggers a native view transition on navigation (experimental flag).
+ *  We keep the browser-default crossfade for page content and ANCHOR the
+ *  persistent header so it never fades or shifts — one fixed spatial reference.
+ *  Directional slides are intentionally omitted (calmer; slides are the top
+ *  motion-sensitivity trigger). Reduced motion collapses all VT animation.
+ * ========================================================================== */
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(site-header) {
+  /* Prevents a brief double-header flash mid-transition. */
+  display: none;
+}
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
+
+/* Soft edge fade for the suburb marquee so it dissolves at the container edges
+   instead of hard-cutting. Transform-only sibling: mask costs no layout. */
+@utility marquee-mask {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
 }

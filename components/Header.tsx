@@ -57,6 +57,9 @@ export function Header() {
 
   return (
     <header
+      // Anchors the header during route view transitions (see globals.css) so
+      // it stays fixed while page content crossfades — the spatial constant.
+      style={{ viewTransitionName: "site-header" }}
       className={cn(
         "sticky top-0 z-50 bg-white transition-shadow",
         scrolled ? "border-b border-line shadow-sm" : "border-b border-transparent",
