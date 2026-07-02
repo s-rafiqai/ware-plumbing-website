@@ -67,11 +67,15 @@ const logo = (
       scale
       parallax
       scrim
+      topScrim /* darker wash behind the top-left logo lockup */
       sizes="100vw"
-      /* Subject sits centre-right; the text block is bottom-left. Bias the crop
-         left on mobile (keeps text over the dark navy area), centre on desktop
-         (where little is cropped and the full composition shows). */
-      imageClassName="object-left md:object-center"
+      /* Subject (wrench, water, glowing pipe) sits centre-right; the whole left
+         third of the photo is near-black empty navy. On mobile object-cover crops
+         to a narrow vertical slice, so bias the crop toward the subject — biasing
+         left showed only the dark void and read as "no image". The bottom-weighted
+         scrim still keeps the bottom-left text legible over it. Desktop shows the
+         full composition centred. */
+      imageClassName="object-[72%_center] md:object-center"
     >
       <Container className="w-full pb-14 pt-16 md:pb-20 md:pt-20">
         {reduce ? (

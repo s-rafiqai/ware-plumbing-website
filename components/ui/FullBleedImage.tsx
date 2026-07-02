@@ -21,6 +21,12 @@ interface FullBleedImageProps {
   parallax?: boolean;
   /** Dark scrim for legibility of overlaid light text (bottom-weighted). */
   scrim?: boolean;
+  /**
+   * Additional top-weighted dark wash, for callers whose overlay begins at the
+   * top (e.g. the homepage logo lockup) where the bottom scrim leaves the top
+   * too bright. Layered under the content, over the image + bottom scrim.
+   */
+  topScrim?: boolean;
   /** Extra classes on the <Image> (e.g. object-position). Additive; defaults to none. */
   imageClassName?: string;
   /** Tailwind min-height class; defaults to the --size-hero token. */
@@ -46,6 +52,7 @@ export function FullBleedImage({
   scale,
   parallax,
   scrim,
+  topScrim,
   imageClassName,
   minHeightClassName = "min-h-[var(--size-hero)]",
   sizes = "100vw",
@@ -90,6 +97,13 @@ export function FullBleedImage({
         <div
           aria-hidden
           className="absolute inset-0 bg-gradient-to-t from-slate-deep/95 via-slate-deep/60 to-slate-deep/35"
+        />
+      )}
+
+      {topScrim && (
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-b from-slate-deep/70 via-slate-deep/20 to-transparent"
         />
       )}
 
