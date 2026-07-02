@@ -45,3 +45,6 @@ next-env.d.ts
 # legacy stock/placeholder photos — swap for real photography before launch.
 # Re-fetch anytime with scripts/fetch-legacy-images.sh
 /public/assets/photos/_replace/
+
+# raw image drops / working scratch — served copies live under public/assets/
+/Images/
