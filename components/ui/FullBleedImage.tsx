@@ -21,6 +21,8 @@ interface FullBleedImageProps {
   parallax?: boolean;
   /** Dark scrim for legibility of overlaid light text (bottom-weighted). */
   scrim?: boolean;
+  /** Extra classes on the <Image> (e.g. object-position). Additive; defaults to none. */
+  imageClassName?: string;
   /** Tailwind min-height class; defaults to the --size-hero token. */
   minHeightClassName?: string;
   sizes?: string;
@@ -44,6 +46,7 @@ export function FullBleedImage({
   scale,
   parallax,
   scrim,
+  imageClassName,
   minHeightClassName = "min-h-[var(--size-hero)]",
   sizes = "100vw",
   className,
@@ -79,7 +82,7 @@ export function FullBleedImage({
           fill
           priority={priority}
           sizes={sizes}
-          className="object-cover"
+          className={cn("object-cover", imageClassName)}
         />
       </motion.div>
 

@@ -28,8 +28,8 @@ export function Hero() {
       width={2030}
       height={974}
       priority
-      sizes="180px"
-      className="h-auto w-[150px] drop-shadow-sm sm:w-[172px]"
+      sizes="(min-width: 1024px) 240px, (min-width: 640px) 208px, 176px"
+      className="h-auto w-[176px] drop-shadow-sm sm:w-[208px] lg:w-[240px]"
     />
   );
   const eyebrow = (
@@ -61,13 +61,17 @@ export function Hero() {
 
   return (
     <FullBleedImage
-      src="/assets/photos/hero-plumber.png"
+      src="/assets/photos/homepagebackground.png"
       alt="" /* decorative — the headline names the business */
       priority
       scale
       parallax
       scrim
       sizes="100vw"
+      /* Subject sits centre-right; the text block is bottom-left. Bias the crop
+         left on mobile (keeps text over the dark navy area), centre on desktop
+         (where little is cropped and the full composition shows). */
+      imageClassName="object-left md:object-center"
     >
       <Container className="w-full pb-14 pt-28 md:pb-20">
         {reduce ? (
