@@ -27,7 +27,7 @@ export default function AboutPage() {
       {/* Story — overlapping photo + offset text card (the page's designed moment). */}
       <Section space="spacious" aria-labelledby="story-heading">
         <div className="lg:grid lg:grid-cols-12 lg:items-center">
-          <Reveal className="lg:col-span-7">
+          <Reveal variant="mask" className="lg:col-span-7">
             <div className="relative aspect-[4/3] overflow-hidden rounded-md shadow-lg">
               <Image
                 src="/assets/photos/roofing.jpg"
@@ -43,7 +43,7 @@ export default function AboutPage() {
             delay={0.1}
             className="relative z-10 -mt-10 lg:col-span-6 lg:col-start-7 lg:-ml-12 lg:mt-0"
           >
-            <div className="rounded-md border border-line bg-white p-8 shadow-lg lg:p-10">
+            <div className="rounded-md border border-line surface-sheen p-8 shadow-lg lg:p-10">
               <h2 id="story-heading" className="text-h2 text-ink text-balance">
                 The friendly, neighbourhood plumber you&rsquo;ve been looking for
               </h2>
@@ -70,35 +70,37 @@ export default function AboutPage() {
 
       {/* Mission */}
       <Section muted aria-labelledby="mission-heading">
-        <Reveal className="max-w-3xl">
+        <div className="max-w-3xl">
           <SectionHeading
+            animate
             id="mission-heading"
             eyebrow="Our mission"
             title="Recognised and respected home-service professionals"
           />
-          <p className="mt-5 text-lead text-ink-soft text-pretty">
-            Ware Plumbing&rsquo;s goal is to become the most recognised and
-            respected home-service professionals for consumers in Australia.
-          </p>
-        </Reveal>
+          <Reveal delay={0.15}>
+            <p className="mt-5 text-lead text-ink-soft text-pretty">
+              Ware Plumbing&rsquo;s goal is to become the most recognised and
+              respected home-service professionals for consumers in Australia.
+            </p>
+          </Reveal>
+        </div>
       </Section>
 
       {/* Why choose us */}
       <Section aria-labelledby="why-heading">
-        <Reveal>
-          <SectionHeading
-            id="why-heading"
-            eyebrow="Why choose us"
-            title="We genuinely want to provide the best service we can"
-            intro="On every level. We always aim to keep our customers happy, satisfied and ready to stay with us for years to come."
-          />
-        </Reveal>
+        <SectionHeading
+          animate
+          id="why-heading"
+          eyebrow="Why choose us"
+          title="We genuinely want to provide the best service we can"
+          intro="On every level. We always aim to keep our customers happy, satisfied and ready to stay with us for years to come."
+        />
         <RevealGroup as="ul" className="mt-10 grid gap-4 sm:grid-cols-2">
           {WHY_CHOOSE.map((item) => (
             <RevealItem
               as="li"
               key={item}
-              className="flex items-center gap-3 rounded-md border border-line bg-white px-5 py-4"
+              className="flex items-center gap-3 rounded-md border border-line surface-sheen px-5 py-4 shadow-sm"
             >
               <span className="grid size-7 shrink-0 place-items-center rounded-full bg-blue-tint text-blue">
                 <Check aria-hidden className="size-4" />

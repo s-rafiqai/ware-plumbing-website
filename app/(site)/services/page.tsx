@@ -32,6 +32,7 @@ export default function ServicesPage() {
         src="/assets/photos/roofing.jpg"
         alt="" /* decorative — the overlaid line carries meaning */
         scale
+        parallax
         scrim
         minHeightClassName="min-h-[380px] md:min-h-[460px]"
       >

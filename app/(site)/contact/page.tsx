@@ -97,7 +97,7 @@ export default function ContactPage() {
               </Button>
             </div>
 
-            <div className="relative mt-8 aspect-[16/10] overflow-hidden rounded-md">
+            <div className="relative mt-8 aspect-[16/10] overflow-hidden rounded-md shadow-md">
               <Image
                 src="/assets/photos/hero-plumber.png"
                 alt="" /* decorative */
@@ -111,7 +111,7 @@ export default function ContactPage() {
           {/* Form */}
           <Reveal
             delay={0.1}
-            className="h-max rounded-md border border-line bg-white p-6 shadow-sm sm:p-8"
+            className="h-max rounded-md border border-line surface-sheen p-6 shadow-md sm:p-8"
           >
             <h2 className="text-h3 text-ink">Get a free quote</h2>
             <p className="mt-2 text-body text-ink-soft">
