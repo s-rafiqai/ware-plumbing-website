@@ -5,7 +5,7 @@
  * the component layer.
  */
 
-export type TrustIconName = "award" | "building" | "wrench";
+export type TrustIconName = "award" | "building" | "wrench" | "clock";
 
 export interface TrustBadge {
   title: string;
@@ -15,15 +15,15 @@ export interface TrustBadge {
 
 export const TRUST_BADGES: readonly TrustBadge[] = [
   {
-    title: "#1 in service",
+    title: "Trusted Local Plumbers",
     description:
-      "Prompt, reliable and reputation-driven — the way a family business should be.",
+      "Fast response, quality workmanship and service you can rely on.",
     icon: "award",
   },
   {
-    title: "Real estate property specialists",
+    title: "Commercial & Education specialists",
     description:
-      "Trusted by local agents for pre-sale inspections and rental repairs.",
+      "Trusted by businesses, schools and facility managers for reliable plumbing maintenance, repairs and upgrades.",
     icon: "building",
   },
   {
@@ -31,6 +31,12 @@ export const TRUST_BADGES: readonly TrustBadge[] = [
     description:
       "Everything from a dripping tap to a full hot water system replacement.",
     icon: "wrench",
+  },
+  {
+    title: "24/7 Emergency Plumbing",
+    description:
+      "Available day or night for urgent plumbing emergencies when you need us most.",
+    icon: "clock",
   },
 ];
 
